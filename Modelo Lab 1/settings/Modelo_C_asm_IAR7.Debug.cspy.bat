@@ -19,22 +19,6 @@
 @REM 
 
 
-@echo off 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.0\common\bin\cspybat" "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.0\arm\bin\armproc.dll" "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.0\arm\bin\armsim2.dll"  %1 --plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.0\arm\bin\armbat.dll" --device_macro "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.0\arm\config\debugger\NXP\lpc1311.dmac" --backend -B "--endian=little" "--cpu=Cortex-M3" "--fpu=None" "-p" "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.0\arm\CONFIG\debugger\NXP\LPC1343.ddf" "--semihosting" "--device=LPC1343" "--multicore_nr_of_cores=1" 
 
-if not "%~1" == "" goto debugFile 
 
-@echo on 
-
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "D:\aulas\EL68E_SE\install_IAR7\Modelo_C_asm_IAR7\settings\Modelo_C_asm_IAR7.Debug.general.xcl" --backend -f "D:\aulas\EL68E_SE\install_IAR7\Modelo_C_asm_IAR7\settings\Modelo_C_asm_IAR7.Debug.driver.xcl" 
-
-@echo off 
-goto end 
-
-:debugFile 
-
-@echo on 
-
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "D:\aulas\EL68E_SE\install_IAR7\Modelo_C_asm_IAR7\settings\Modelo_C_asm_IAR7.Debug.general.xcl" "--debug_file=%~1" --backend -f "D:\aulas\EL68E_SE\install_IAR7\Modelo_C_asm_IAR7\settings\Modelo_C_asm_IAR7.Debug.driver.xcl" 
-
-@echo off 
-:end

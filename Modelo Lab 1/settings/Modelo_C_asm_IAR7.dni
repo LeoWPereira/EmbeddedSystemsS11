@@ -38,16 +38,16 @@ ShowArgs=0
 MixedMode=1
 [InterruptLog]
 LogEnabled=0
+SumEnabled=0
 GraphEnabled=0
 ShowTimeLog=1
-SumEnabled=0
 ShowTimeSum=1
 SumSortOrder=0
 [DataLog]
 LogEnabled=0
+SumEnabled=0
 GraphEnabled=0
 ShowTimeLog=1
-SumEnabled=0
 ShowTimeSum=1
 [Disassemble mode]
 mode=0
