@@ -26,8 +26,8 @@
  *
  *          Diagramas de Atividades (UML) :   
  *             - https://creately.com/app?diagid=jesh3c0z1
- *             -
- *             - 
+ *             - https://creately.com/app?diagid=jesjme8s1
+ *             - https://creately.com/app?diagid=jesjme8s2
  */
 
 #include "main.h"
