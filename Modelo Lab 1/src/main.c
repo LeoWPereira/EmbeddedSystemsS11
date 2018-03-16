@@ -9,7 +9,8 @@
  *             - http://dainf.ct.utfpr.edu.br/~hvieir/download/pdi99.pdf (secao 4.2.2)
  *             - http://netpbm.sourceforge.net/doc/pgm.html
  *             - http://infocenter.arm.com/help/topic/com.arm.doc.espc0002/ATPCS.pdf
- *             -
+ *             - https://homepages.inf.ed.ac.uk/rbf/HIPR2/mean.htm
+ *             - https://homepages.inf.ed.ac.uk/rbf/HIPR2/median.htm
  *          
  *           Ideas for maximum performance:
  *             - The basic 2D convolution algorithm is pretty bad, we could optimize it by following this link:
