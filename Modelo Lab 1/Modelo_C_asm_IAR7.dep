@@ -6,40 +6,40 @@
   <configuration>
     <name>Debug</name>
     <outputs>
-      <file>$PROJ_DIR$\src\main.h</file>
       <file>$TOOLKIT_DIR$\inc\c\ystdio.h</file>
       <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\stdlib.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
-      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
       <file>$PROJ_DIR$\src\main.c</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdlib.h</file>
+      <file>$PROJ_DIR$\src\main.h</file>
+      <file>$PROJ_DIR$\src\asm.s</file>
+      <file>$PROJ_DIR$\src\cstartup_M.s</file>
       <file>$PROJ_DIR$\Debug\Exe\Modelo_C_asm_IAR7.out</file>
-      <file>$PROJ_DIR$\Debug\Obj\Modelo_C_asm_IAR7.pbd</file>
+      <file>$PROJ_DIR$\linker\generic_cortex.icf</file>
       <file>$PROJ_DIR$\Debug\Obj\asm.o</file>
       <file>$PROJ_DIR$\Debug\Obj\cstartup_M.o</file>
-      <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
+      <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Modelo_C_asm_IAR7.pbd</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
       <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
-      <file>$PROJ_DIR$\linker\generic_cortex.icf</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
       <file>$TOOLKIT_DIR$\lib\m7M_tl.a</file>
-      <file>$PROJ_DIR$\src\cstartup_M.s</file>
-      <file>$PROJ_DIR$\src\asm.s</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
       <file>$TOOLKIT_DIR$\lib\dl7M_tlf.a</file>
+      <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
     </outputs>
     <file>
       <name>[ROOT_NODE]</name>
       <outputs>
         <tool>
           <name>ILINK</name>
-          <file> 16</file>
+          <file> 7</file>
         </tool>
       </outputs>
     </file>
@@ -48,50 +48,50 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 13</file>
+          <file> 17</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 14</file>
+          <file> 21</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 0 9 11 12 10 7 5 6 8 2 4 1 3</file>
+          <file> 4 16 14 23 24 12 20 13 19 1 11 0 3</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 0 9 11 12 10 7 5 6 8 2 4 1 3</file>
+          <file> 4 16 14 23 24 12 20 13 19 1 11 0 3</file>
         </tool>
       </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Debug\Exe\Modelo_C_asm_IAR7.out</name>
-      <inputs>
-        <tool>
-          <name>ILINK</name>
-          <file> 22 18 19 14 21 20 23 26</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\src\cstartup_M.s</name>
-      <outputs>
-        <tool>
-          <name>AARM</name>
-          <file> 19</file>
-        </tool>
-      </outputs>
     </file>
     <file>
       <name>$PROJ_DIR$\src\asm.s</name>
       <outputs>
         <tool>
           <name>AARM</name>
-          <file> 18</file>
+          <file> 9</file>
         </tool>
       </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\src\cstartup_M.s</name>
+      <outputs>
+        <tool>
+          <name>AARM</name>
+          <file> 10</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\Modelo_C_asm_IAR7.out</name>
+      <inputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 8 9 10 21 18 26 22 25</file>
+        </tool>
+      </inputs>
     </file>
   </configuration>
   <configuration>
