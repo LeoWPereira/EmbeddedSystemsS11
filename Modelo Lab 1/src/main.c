@@ -42,8 +42,6 @@ typedef struct {
      uint16_t height;
      
      uint16_t maxGrayValue;
-     
-     uint8_t *data;
 } PGMImage;
 
 /* Private define ------------------------------------------------------------*/
@@ -53,7 +51,11 @@ typedef struct {
 
 #define PGM_FILENAME          "teste24x7.pgm"
 
-#define ERROR_FOPEN           "File could not be opened"
+#define ERROR_FOPEN                    "ERROR: File could not be opened"
+#define ERROR_FGETS                    "ERROR: File could not be read"
+#define ERROR_TYPE_NOT_SUPPORTED       "ERROR: File format not supported"
+#define ERROR_TYPE_SIZE_NOT_READ       "ERROR: Could not read image size"
+#define ERROR_TYPE_MAX_GRAY_VALUE      "ERROR: Could not read max. gray value"
 
 /* Private macro -------------------------------------------------------------*/
 
@@ -74,8 +76,16 @@ int main()
    
    PGMImage *pgmImage;
    
+   uint32_t sizeOfImage = 0;
+   
+   uint8_t *imageData;
+    
+   memset(pgmImage, 
+          0x00,
+          sizeof(PGMImage));
+   
    myFile = fopen(PGM_FILENAME, 
-                  "r");
+                  "rb");
     
    if(!myFile)
    {
@@ -84,12 +94,32 @@ int main()
       return 1;
    }
    
-   readPGM(myFile,
-           pgmImage);
+   if(!readPGM(myFile,
+               pgmImage))
+   {
+      return 1;
+   }
+   
+   /////////////////////////////////////////
+   /// Next step, alloc memory for image ///
+   /////////////////////////////////////////
+   
+   sizeOfImage = (pgmImage->width * pgmImage->height * sizeof(uint8_t));
+         
+   imageData = (uint8_t *)malloc(sizeOfImage);
+    
+   for(uint32_t i = 0; i < sizeOfImage; i++)
+   {
+      fscanf(myFile, "%d", &imageData[i]);
+   }
+    
+   fclose(myFile);
    
    /*int i;  
    
    i = meanfilter3(4, 9, 0, 0);*/
+   
+   //free(imageData);
    
    return 0;
 }
@@ -107,18 +137,30 @@ void informError(uint8_t* str)
 uint8_t readPGM(FILE *fp,
                 PGMImage *stPGM)
 {
-   char buffer[128];
+   char buffer[4];
    
-   //read image format
+   memset(&buffer, 
+          0x00,
+          sizeof(buffer));
+   
+   //////////////////////////
+   ///  Read Image Format ///
+   //////////////////////////
+   
+   // will read til the first new line character
    if (!fgets(buffer, sizeof(buffer), fp)) 
    {
-      return 1;
+      informError(ERROR_FGETS);
+      
+      return 0;
    }
   
    //check the image format
    if(buffer[0] != 'P')
    { 
-      return 1;
+      informError(ERROR_TYPE_NOT_SUPPORTED);
+      
+      return 0;
    }
    
    if(buffer[1] == '2')
@@ -131,5 +173,37 @@ uint8_t readPGM(FILE *fp,
       stPGM->fileType = P5;
    }
    
-   return 0;
+   ///////////////////////
+   /// Read Commentary ///
+   ///////////////////////
+   
+   //check for comments
+   uint8_t c = getc(fp);
+   
+   while (c == '#') 
+   {
+      while (getc(fp) != '\n');
+      
+      c = getc(fp);
+   }
+   
+   ungetc(c, fp);
+   
+   //read image size information
+   if (fscanf(fp, "%d %d", &stPGM->width, &stPGM->height) != 2) 
+   {
+      informError(ERROR_TYPE_SIZE_NOT_READ);
+      
+      return 0;
+   }
+
+   //read rgb component
+   if (fscanf(fp, "%d", &stPGM->maxGrayValue) != 1) 
+   {
+      informError(ERROR_TYPE_MAX_GRAY_VALUE);
+      
+      return 0;
+   }
+   
+   return 1;
 }

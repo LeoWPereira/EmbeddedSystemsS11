@@ -711,7 +711,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$PROJ_DIR$\linker\generic_cortex.icf</state>
+          <state>$PROJ_DIR$\modelo_C_asm_1343.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
