@@ -31,7 +31,9 @@
  *             - https://creately.com/app?diagid=jesjme8s2
  */
 
-#include "main.h"
+#include<stdint.h>
+#include<stdio.h>
+#include<stdlib.h>
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -42,6 +44,8 @@ typedef struct {
      uint16_t height;
      
      uint16_t maxGrayValue;
+     
+     uint8_t *data;
 } PGMImage;
 
 /* Private define ------------------------------------------------------------*/
@@ -77,15 +81,13 @@ int main()
    PGMImage *pgmImage;
    
    uint32_t sizeOfImage = 0;
-   
-   uint8_t *imageData;
-    
+       
    memset(pgmImage, 
           0x00,
           sizeof(PGMImage));
    
    myFile = fopen(PGM_FILENAME, 
-                  "rb");
+                  "r");
     
    if(!myFile)
    {
@@ -105,12 +107,12 @@ int main()
    /////////////////////////////////////////
    
    sizeOfImage = (pgmImage->width * pgmImage->height * sizeof(uint8_t));
-         
-   imageData = (uint8_t *)malloc(sizeOfImage);
+   
+   pgmImage->data = (uint8_t *)malloc(sizeOfImage);
     
    for(uint32_t i = 0; i < sizeOfImage; i++)
    {
-      fscanf(myFile, "%d", &imageData[i]);
+      fscanf(myFile, "%d", &pgmImage->data[i]);
    }
     
    fclose(myFile);
