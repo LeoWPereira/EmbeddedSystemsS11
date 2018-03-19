@@ -242,15 +242,22 @@ uint32_t meanfilter3(uint16_t dim_x,
    uint16_t linha2;
    uint16_t linha3;
    
-   for(uint16_t colunas = 0; colunas < dim_x_imagem_saida; colunas++)
+   uint16_t colunas = 0;
+   uint16_t linhas = 0;
+   
+   for(; colunas < dim_x_imagem_saida; colunas++)
    {
-      for(uint16_t linhas = 0; linhas < dim_y_imagem_saida; linhas++)
-      {
-         linha1 = img_in[colunas + (linhas * dim_x)] + img_in[colunas + (linhas * dim_x) + 1] + img_in[colunas + (linhas * dim_x) + 2];
-         linha2 = img_in[colunas + ((linhas + 1) * dim_x)] + img_in[colunas + ((linhas + 1) * dim_x) + 1] + img_in[colunas + ((linhas + 1) * dim_x) + 2];
+      // init first two column sums
+      linha1 = img_in[colunas + (linhas * dim_x)] + img_in[colunas + (linhas * dim_x) + 1] + img_in[colunas + (linhas * dim_x) + 2];
+      linha2 = img_in[colunas + ((linhas + 1) * dim_x)] + img_in[colunas + ((linhas + 1) * dim_x) + 1] + img_in[colunas + ((linhas + 1) * dim_x) + 2];
+         
+      for(; linhas < dim_y_imagem_saida; linhas++)
+      {   
          linha3 = img_in[colunas + ((linhas + 2) * dim_x)] + img_in[colunas + ((linhas + 2) * dim_x) + 1] + img_in[colunas + ((linhas + 2) * dim_x) + 2];
          
          img_out[posicaoAtualSaida] = (linha1 + linha2 + linha3) / 9;
+         
+         totalPixelsImagemSaida++;
          
          /////////////////////////////////
          /// Apenas Incrementa valores ///
@@ -259,11 +266,16 @@ uint32_t meanfilter3(uint16_t dim_x,
          if(linhas < (dim_y_imagem_saida - 1))
          {
             posicaoAtualSaida += dim_x_imagem_saida;
+            
+            //////////////////////////////////////////////////////////
+            /// Por fim, apenas faz o shuffle das somas das linhas ///
+            //////////////////////////////////////////////////////////
+            linha1 = linha2;
+            linha2 = linha3;
          }
-         
-         totalPixelsImagemSaida++;
       }
       
+      linhas = 0;
       posicaoAtualSaida = (colunas + 1);
    }
    
