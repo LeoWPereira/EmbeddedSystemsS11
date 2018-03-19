@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>3295505215</fileChecksum>
+  <fileChecksum>1151934368</fileChecksum>
   <configuration>
     <name>Debug</name>
     <outputs>
@@ -15,7 +15,6 @@
       <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
       <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
       <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\asm.o</file>
       <file>$PROJ_DIR$\Debug\Obj\main.o</file>
       <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
       <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
@@ -37,7 +36,7 @@
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 17 9 10 21 22 15 14</file>
+          <file> 16 9 20 21 14 13</file>
         </tool>
       </inputs>
     </file>
@@ -50,38 +49,33 @@
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 10</file>
+          <file> 9</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 16 5 7 0 20 18 3 6 4 11 12 1 2</file>
+          <file> 15 5 7 0 19 17 3 6 4 10 11 1 2</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 16 5 7 0 20 18 3 6 4 11 12 1 2</file>
+          <file> 15 5 7 0 19 17 3 6 4 10 11 1 2</file>
         </tool>
       </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\src\asm.s</name>
-      <outputs>
-        <tool>
-          <name>AARM</name>
-          <file> 9</file>
-        </tool>
-      </outputs>
     </file>
     <file>
       <name>[ROOT_NODE]</name>
       <outputs>
         <tool>
           <name>ILINK</name>
-          <file> 19</file>
+          <file> 18</file>
         </tool>
       </outputs>
     </file>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\src\main.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
   </configuration>
   <configuration>
     <name>Release</name>

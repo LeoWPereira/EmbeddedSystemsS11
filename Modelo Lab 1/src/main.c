@@ -51,7 +51,8 @@ typedef struct {
 #define P2                    2
 #define P5                    5
 
-#define PGM_FILENAME          "teste24x7.pgm"
+//#define PGM_FILENAME          "teste5x5.pgm"
+#define PGM_FILENAME          "lena512.pgm"
 
 #define ERROR_FOPEN                    "ERROR: File could not be opened"
 #define ERROR_FGETS                    "ERROR: File could not be read"
@@ -80,7 +81,8 @@ int main()
    
    uint8_t *filteredImage;
    
-   uint32_t sizeOfImage = 0;
+   uint32_t sizeOriginalImage = 0;
+   uint32_t sizeFilteredImage = 0;
    
    uint32_t totalPixelsImagemSaida = 0;
        
@@ -108,18 +110,19 @@ int main()
    /// Agora, alocar memoria para as imagens ///
    /////////////////////////////////////////////
    
-   sizeOfImage = (pgmImage->width * pgmImage->height * sizeof(uint8_t));
+   sizeOriginalImage = (pgmImage->width * pgmImage->height * sizeof(uint8_t));
+   sizeFilteredImage = ((pgmImage->width - MASK_SIZE + 1) * (pgmImage->height - MASK_SIZE + 1) * sizeof(uint8_t));
    
-   pgmImage->data = (uint8_t *)malloc(sizeOfImage);
+   pgmImage->data = (uint8_t *)malloc(sizeOriginalImage);
    
-   filteredImage  = (uint8_t *)malloc(sizeOfImage - MASK_SIZE + 1);
+   filteredImage  = (uint8_t *)malloc(sizeFilteredImage);
    
    //////////////////////////////////////////////////////
    ///   Depois de alocado corretamente os buffers,   ///
    /// preencher a imagem original e aplicar o filtro ///
    //////////////////////////////////////////////////////
     
-   for(uint32_t i = 0; i < sizeOfImage; i++)
+   for(uint32_t i = 0; i < sizeOriginalImage; i++)
    {
       fscanf(myFile, "%c", &pgmImage->data[i]);
    }
@@ -220,4 +223,49 @@ uint8_t readPGM(FILE *fp,
    while (getc(fp) != '\n');
    
    return 1;
+}
+
+uint32_t meanfilter3(uint16_t dim_x,
+                     uint16_t dim_y,
+                     uint8_t  img_in[],
+                     uint8_t  img_out[])
+{
+   uint32_t totalPixelsImagemSaida = 0;
+   
+   uint16_t dim_x_imagem_saida = (dim_x - MASK_SIZE + 1);
+   uint16_t dim_y_imagem_saida = (dim_y - MASK_SIZE + 1);
+   
+   uint16_t posicaoAtualEntrada = 0;
+   uint16_t posicaoAtualSaida = 0;
+   
+   uint16_t linha1;
+   uint16_t linha2;
+   uint16_t linha3;
+   
+   for(uint16_t colunas = 0; colunas < dim_x_imagem_saida; colunas++)
+   {
+      for(uint16_t linhas = 0; linhas < dim_y_imagem_saida; linhas++)
+      {
+         linha1 = img_in[colunas + (linhas * dim_x)] + img_in[colunas + (linhas * dim_x) + 1] + img_in[colunas + (linhas * dim_x) + 2];
+         linha2 = img_in[colunas + ((linhas + 1) * dim_x)] + img_in[colunas + ((linhas + 1) * dim_x) + 1] + img_in[colunas + ((linhas + 1) * dim_x) + 2];
+         linha3 = img_in[colunas + ((linhas + 2) * dim_x)] + img_in[colunas + ((linhas + 2) * dim_x) + 1] + img_in[colunas + ((linhas + 2) * dim_x) + 2];
+         
+         img_out[posicaoAtualSaida] = (linha1 + linha2 + linha3) / 9;
+         
+         /////////////////////////////////
+         /// Apenas Incrementa valores ///
+         /////////////////////////////////
+         
+         if(linhas < (dim_y_imagem_saida - 1))
+         {
+            posicaoAtualSaida += dim_x_imagem_saida;
+         }
+         
+         totalPixelsImagemSaida++;
+      }
+      
+      posicaoAtualSaida = (colunas + 1);
+   }
+   
+   return totalPixelsImagemSaida;
 }
