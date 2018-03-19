@@ -31,9 +31,7 @@
  *             - https://creately.com/app?diagid=jesjme8s2
  */
 
-#include<stdint.h>
-#include<stdio.h>
-#include<stdlib.h>
+#include "main.h"
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -80,7 +78,11 @@ int main()
    
    PGMImage *pgmImage;
    
+   uint8_t *filteredImage;
+   
    uint32_t sizeOfImage = 0;
+   
+   uint32_t totalPixelsImagemSaida = 0;
        
    memset(pgmImage, 
           0x00,
@@ -102,24 +104,32 @@ int main()
       return 1;
    }
    
-   /////////////////////////////////////////
-   /// Next step, alloc memory for image ///
-   /////////////////////////////////////////
+   /////////////////////////////////////////////
+   /// Agora, alocar memoria para as imagens ///
+   /////////////////////////////////////////////
    
    sizeOfImage = (pgmImage->width * pgmImage->height * sizeof(uint8_t));
    
    pgmImage->data = (uint8_t *)malloc(sizeOfImage);
+   
+   filteredImage  = (uint8_t *)malloc(sizeOfImage - MASK_SIZE + 1);
+   
+   //////////////////////////////////////////////////////
+   ///   Depois de alocado corretamente os buffers,   ///
+   /// preencher a imagem original e aplicar o filtro ///
+   //////////////////////////////////////////////////////
     
    for(uint32_t i = 0; i < sizeOfImage; i++)
    {
-      fscanf(myFile, "%d", &pgmImage->data[i]);
+      fscanf(myFile, "%c", &pgmImage->data[i]);
    }
     
    fclose(myFile);
-   
-   /*int i;  
-   
-   i = meanfilter3(4, 9, 0, 0);*/
+      
+   totalPixelsImagemSaida = meanfilter3(pgmImage->width, 
+                                        pgmImage->height, 
+                                        pgmImage->data, 
+                                        filteredImage);
    
    //free(imageData);
    
@@ -206,6 +216,8 @@ uint8_t readPGM(FILE *fp,
       
       return 0;
    }
+   
+   while (getc(fp) != '\n');
    
    return 1;
 }
