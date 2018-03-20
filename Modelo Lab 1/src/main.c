@@ -51,8 +51,8 @@ typedef struct {
 #define P2                    2
 #define P5                    5
 
-//#define PGM_FILENAME          "teste5x5.pgm"
-#define PGM_FILENAME          "lena512.pgm"
+#define PGM_FILENAME          "teste5x5.pgm"
+//#define PGM_FILENAME          "lena512.pgm"
 
 #define ERROR_FOPEN                    "ERROR: File could not be opened"
 #define ERROR_FGETS                    "ERROR: File could not be read"
@@ -235,8 +235,8 @@ uint32_t meanfilter3(uint16_t dim_x,
    uint16_t dim_x_imagem_saida = (dim_x - MASK_SIZE + 1);
    uint16_t dim_y_imagem_saida = (dim_y - MASK_SIZE + 1);
    
-   uint16_t posicaoAtualEntrada = 0;
-   uint16_t posicaoAtualSaida = 0;
+   uint32_t posicaoAtualEntrada = 0;
+   uint32_t posicaoAtualSaida = 0;
    
    uint16_t linha1;
    uint16_t linha2;
@@ -245,15 +245,21 @@ uint32_t meanfilter3(uint16_t dim_x,
    uint16_t colunas = 0;
    uint16_t linhas = 0;
    
+   uint32_t aux;
+   
    for(; colunas < dim_x_imagem_saida; colunas++)
    {
       // init first two column sums
-      linha1 = img_in[colunas + (linhas * dim_x)] + img_in[colunas + (linhas * dim_x) + 1] + img_in[colunas + (linhas * dim_x) + 2];
-      linha2 = img_in[colunas + ((linhas + 1) * dim_x)] + img_in[colunas + ((linhas + 1) * dim_x) + 1] + img_in[colunas + ((linhas + 1) * dim_x) + 2];
+      aux = colunas + (linhas * dim_x);
+      linha1 = img_in[aux] + img_in[aux + 1] + img_in[aux + 2];
+      
+      aux = colunas + ((linhas + 1) * dim_x);
+      linha2 = img_in[aux] + img_in[aux + 1] + img_in[aux + 2];
          
       for(; linhas < dim_y_imagem_saida; linhas++)
       {   
-         linha3 = img_in[colunas + ((linhas + 2) * dim_x)] + img_in[colunas + ((linhas + 2) * dim_x) + 1] + img_in[colunas + ((linhas + 2) * dim_x) + 2];
+         aux = colunas + ((linhas + 2) * dim_x);
+         linha3 = img_in[aux] + img_in[aux + 1] + img_in[aux + 2];
          
          img_out[posicaoAtualSaida] = (linha1 + linha2 + linha3) / 9;
          
