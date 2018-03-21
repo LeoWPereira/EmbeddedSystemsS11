@@ -51,8 +51,10 @@ typedef struct {
 #define P2                    2
 #define P5                    5
 
-#define PGM_FILENAME          "teste5x5.pgm"
-//#define PGM_FILENAME          "lena512.pgm"
+//#define PGM_FILENAME           "teste5x5.pgm"
+//#define PGM_FILENAME_OUT       "teste5x5_FILTERED.pgm"
+#define PGM_FILENAME             "lena512.pgm"
+#define PGM_FILENAME_OUT         "lena512_FILTERED.pgm"
 
 #define ERROR_FOPEN                    "ERROR: File could not be opened"
 #define ERROR_FGETS                    "ERROR: File could not be read"
@@ -76,6 +78,7 @@ uint8_t readPGM(FILE *fp,
 int main()
 {
    FILE *myFile;
+   FILE *outFile;
    
    PGMImage *pgmImage;
    
@@ -92,6 +95,9 @@ int main()
    
    myFile = fopen(PGM_FILENAME, 
                   "r");
+   
+   outFile = fopen(PGM_FILENAME_OUT, 
+                   "w");
     
    if(!myFile)
    {
@@ -134,7 +140,16 @@ int main()
                                         pgmImage->data, 
                                         filteredImage);
    
-   //free(imageData);
+   //////////////////////////////////
+   /// Save filteredImage to file ///
+   //////////////////////////////////
+   
+   fprintf(outFile, "P5\n# Created by Leonardo Winter Pereira\n509 509\n255\n%s", filteredImage);
+   
+   fclose(outFile);
+   
+   free(pgmImage->data);
+   free(filteredImage);
    
    return 0;
 }
@@ -230,6 +245,10 @@ uint32_t meanfilter3(uint16_t dim_x,
                      uint8_t  img_in[],
                      uint8_t  img_out[])
 {
+   /////////////////////
+   /// Variable Init ///
+   /////////////////////
+  
    uint32_t totalPixelsImagemSaida = 0;
    
    uint16_t dim_x_imagem_saida = (dim_x - MASK_SIZE + 1);
@@ -245,11 +264,15 @@ uint32_t meanfilter3(uint16_t dim_x,
    uint16_t colunas = 0;
    uint16_t linhas = 0;
    
+   ////////////
+   /// Code ///
+   ////////////
+   
    for(; colunas < dim_x_imagem_saida; colunas++)
    {
       // init first two column sums
       posicaoAtualEntrada = colunas + (linhas * dim_x);
-      linha1 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2];
+      linha1 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2]; // 11 ciclos de clock
       
       posicaoAtualEntrada += dim_x;
       linha2 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2];
@@ -259,8 +282,8 @@ uint32_t meanfilter3(uint16_t dim_x,
          posicaoAtualEntrada += dim_x;
          linha3 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2];
          
-         //img_out[posicaoAtualSaida] = (((linha1 + linha2 + linha3) * (uint32_t)0xF78E) >> 16) >> 2;
-         img_out[posicaoAtualSaida] = (linha1 + linha2 + linha3) / 9;
+         img_out[posicaoAtualSaida] = (((linha1 + linha2 + linha3) * (uint32_t)0x7200) >> 16) >> 2;
+         //img_out[posicaoAtualSaida] = (linha1 + linha2 + linha3) / 9;
          
          totalPixelsImagemSaida++;
          
