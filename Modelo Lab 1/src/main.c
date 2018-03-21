@@ -259,6 +259,7 @@ uint32_t meanfilter3(uint16_t dim_x,
          posicaoAtualEntrada += dim_x;
          linha3 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2];
          
+         //img_out[posicaoAtualSaida] = (((linha1 + linha2 + linha3) * (uint32_t)0xF78E) >> 16) >> 2;
          img_out[posicaoAtualSaida] = (linha1 + linha2 + linha3) / 9;
          
          totalPixelsImagemSaida++;
