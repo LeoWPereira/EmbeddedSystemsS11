@@ -48,20 +48,6 @@ typedef struct {
 
 /* Private define ------------------------------------------------------------*/
 
-#define P2                    2
-#define P5                    5
-
-//#define PGM_FILENAME           "teste5x5.pgm"
-//#define PGM_FILENAME_OUT       "teste5x5_FILTERED.pgm"
-#define PGM_FILENAME             "lena512.pgm"
-#define PGM_FILENAME_OUT         "lena512_FILTERED.pgm"
-
-#define ERROR_FOPEN                    "ERROR: File could not be opened"
-#define ERROR_FGETS                    "ERROR: File could not be read"
-#define ERROR_TYPE_NOT_SUPPORTED       "ERROR: File format not supported"
-#define ERROR_TYPE_SIZE_NOT_READ       "ERROR: Could not read image size"
-#define ERROR_TYPE_MAX_GRAY_VALUE      "ERROR: Could not read max. gray value"
-
 /* Private macro -------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
@@ -88,16 +74,12 @@ int main()
    uint32_t sizeFilteredImage = 0;
    
    uint32_t totalPixelsImagemSaida = 0;
-       
-   memset(pgmImage, 
-          0x00,
-          sizeof(PGMImage));
    
    myFile = fopen(PGM_FILENAME, 
-                  "r");
+                  "rb");
    
    outFile = fopen(PGM_FILENAME_OUT, 
-                   "w");
+                   "wb");
     
    if(!myFile)
    {
@@ -130,7 +112,7 @@ int main()
     
    for(uint32_t i = 0; i < sizeOriginalImage; i++)
    {
-      fscanf(myFile, "%c", &pgmImage->data[i]);
+      pgmImage->data[i] = getc(myFile);
    }
     
    fclose(myFile);
@@ -144,7 +126,12 @@ int main()
    /// Save filteredImage to file ///
    //////////////////////////////////
    
-   fprintf(outFile, "P5\n# Created by Leonardo Winter Pereira\n509 509\n255\n%s", filteredImage);
+   fprintf(outFile, "P5\n# Created by Leonardo Winter Pereira\n%d %d\n%d\n", (pgmImage->width - MASK_SIZE + 1), (pgmImage->height - MASK_SIZE + 1), pgmImage->maxGrayValue);
+   
+   for(uint32_t i = 0; i < sizeFilteredImage; i++)
+   {
+      fprintf(outFile, "%c", filteredImage[i]);
+   }
    
    fclose(outFile);
    
@@ -168,10 +155,6 @@ uint8_t readPGM(FILE *fp,
                 PGMImage *stPGM)
 {
    char buffer[4];
-   
-   memset(&buffer, 
-          0x00,
-          sizeof(buffer));
    
    //////////////////////////
    ///  Read Image Format ///
@@ -264,6 +247,9 @@ uint32_t meanfilter3(uint16_t dim_x,
    uint16_t colunas = 0;
    uint16_t linhas = 0;
    
+   //uint32_t aux1 = 0;
+   //uint32_t aux2 = 0;
+   
    ////////////
    /// Code ///
    ////////////
@@ -278,12 +264,20 @@ uint32_t meanfilter3(uint16_t dim_x,
       linha2 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2];
          
       for(; linhas < dim_y_imagem_saida; linhas++)
-      {   
+      {           
          posicaoAtualEntrada += dim_x;
          linha3 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2];
          
-         img_out[posicaoAtualSaida] = (((linha1 + linha2 + linha3) * (uint32_t)0x7200) >> 16) >> 2;
          //img_out[posicaoAtualSaida] = (linha1 + linha2 + linha3) / 9;
+         //aux2 = img_out[posicaoAtualSaida];
+         
+         img_out[posicaoAtualSaida] = (((linha1 + linha2 + linha3) * (uint32_t)0xE38F) >> 17) >> 2;
+         //aux1 = img_out[posicaoAtualSaida];
+         
+         /*if(aux1 != aux2)
+         {
+            printf("ERRO");
+         }*/
          
          totalPixelsImagemSaida++;
          

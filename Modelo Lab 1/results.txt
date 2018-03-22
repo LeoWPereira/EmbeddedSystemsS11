@@ -19,22 +19,22 @@ w/o size constrains	: 8811307  (-28,07%)
 
 
 
-						Divide by 3
+						Divide by 9
 
-Convert to binary. 1 / 3 = 00111110 10101010 10101010 10101011
+Convert to binary. 1 / 9 = 00111101 11100011 10001110 00111001
 
 Left shift until there is a 1 to the right of the binary point. 
-	In this case it requires 2 shifts and we get 0.11111010 10101010 10101010 10101111. S is thus 2.
+	In this case it requires 2 shifts and we get 0.1111 0111 1000 1110 0011 1000 100. S is thus 2.
 
-Take the most significant 17 bits: 1111 1010 1010 1010 1
+Take the most significant 19 bits: 1111 0111 1000 1110 001
 
-Add 1: giving 1111 1010 1010 1010 1 + 1 = 	1111 1010 1010 1011 0
+Add 1: giving 1111 0111 1000 1110 001 + 1 = 	1111 0111 1000 1110 010
 
-Truncate to 16 bits: 1111 1010 1010 1011
+Truncate to 16 bits: 1111 0111 1000 1110
 
-Express in hexadecimal: M = 0xFAAB
+Express in hexadecimal: M = 0xF78E
 
-Q = (((uint32_t)A * (uint32_t)0xFAAB) >> 16) >> 2
+Q = (((uint32_t)A * (uint32_t)0xF78E) >> 19) >> 2
 
 An exhaustive check confirms that this expression does indeed do the job for all 16 bit values of A. 
 It is also about 10 times faster than the compiler division routine on an AVR processor.

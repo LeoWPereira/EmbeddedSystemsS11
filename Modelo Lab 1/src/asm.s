@@ -23,7 +23,8 @@
  * @retval  R0 : total pixels written on img_out[]
  */
 meanfilter3:
-   add r0, r1
+   //PUSH 
+   
    bx lr
 
    END

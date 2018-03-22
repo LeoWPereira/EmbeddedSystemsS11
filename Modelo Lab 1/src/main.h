@@ -23,6 +23,22 @@
 
 #define MASK_SIZE                                           3
 
+#define P2                    2
+#define P5                    5
+
+//#define PGM_FILENAME           "teste5x5.pgm"
+//#define PGM_FILENAME_OUT       "teste5x5_FILTERED.pgm"
+//#define PGM_FILENAME           "teste24x7.pgm"
+//#define PGM_FILENAME_OUT       "teste24x7_FILTERED.pgm"
+#define PGM_FILENAME             "lena512.pgm"
+#define PGM_FILENAME_OUT         "lena512_FILTERED.pgm"
+
+#define ERROR_FOPEN                    "ERROR: File could not be opened"
+#define ERROR_FGETS                    "ERROR: File could not be read"
+#define ERROR_TYPE_NOT_SUPPORTED       "ERROR: File format not supported"
+#define ERROR_TYPE_SIZE_NOT_READ       "ERROR: Could not read image size"
+#define ERROR_TYPE_MAX_GRAY_VALUE      "ERROR: Could not read max. gray value"
+
 /* Externable Variables ------------------------------------------------------*/
 
 
