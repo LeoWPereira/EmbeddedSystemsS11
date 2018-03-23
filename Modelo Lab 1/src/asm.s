@@ -93,13 +93,7 @@ LOOP_COLUNAS_IMAGEM_SAIDA:
     //
     
     ADD         R4, LR, R2
-   
-    /*LDRB        R9, [R4]
-    LDRB        R7, [R4, #0x1]
-    ADD         R7, R7, R9
-    LDRB        R4, [R4, #0x2]
-    ADD         R4, R4, R7*/
-    
+       
     LDR         R9, [R4]
     UBFX        R7, R9, #0x8, #0x8
     UBFX        R4, R9, #0x10, #0x8
@@ -213,6 +207,5 @@ ACABA_FILTRO:
     ADD         SP, SP, #0x10
    
     POP         {R4-R11, PC}
-    //BX          LR
 
     END
