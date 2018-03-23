@@ -13,6 +13,7 @@
    SECTION .text : CODE (2)
    THUMB
 
+
 /**
  * @brief   
  * @param   R0 : dim_x
@@ -74,13 +75,21 @@ LOOP_COLUNAS_IMAGEM_SAIDA:
 
     //
     // linha1 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2] 
-    // 
-    LDR         R12, [R6]
+    //
+    // aqui podemos usar um unico LRD(WORD) e depois usar BFI e BFC, ganhando 1 ou 2 ciclos de clock
+   
+    LDRB        R12, [R6]
+    LDRB        R4, [R12, #0x1]
+    ADD         R12, R12, R4
+    LDRB        R4, [R12, #0x2]
+    ADD         R12, R12, R4
+    
+    /*LDR         R12, [R6]
     UBFX        R4, R12, #0x8, #0x8
     UBFX        R9, R12, #0x10, #0x8
     BFC         R12, #0x8, #0x18
     ADD         R12, R12, R4
-    ADD         R12, R12, R9
+    ADD         R12, R12, R9*/
       
     //
     // posicaoAtualEntrada += dim_x
@@ -90,14 +99,21 @@ LOOP_COLUNAS_IMAGEM_SAIDA:
     //
     // linha2 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2]
     //
+    // aqui podemos usar um unico LRD(WORD) e depois usar BFI e BFC, ganhando 1 ou 2 ciclos de clock
     ADD         R4, LR, R2
-       
-    LDR         R9, [R4]
+   
+    LDRB        R9, [LR, R2]
+    LDRB        R7, [R4, #0x1]
+    ADD         R7, R7, R9
+    LDRB        R4, [R4, #0x2]
+    ADD         R4, R4, R7
+    
+    /*LDR         R9, [R4]
     UBFX        R7, R9, #0x8, #0x8
     UBFX        R4, R9, #0x10, #0x8
     BFC         R9, #0x8, #0x18
     ADD         R7, R7, R9
-    ADD         R4, R4, R7
+    ADD         R4, R4, R7*/
     
     CMP         R3, #0x1
     BLT         FIM_LOOP_LINHAS_IMAGEM_SAIDA
@@ -119,14 +135,21 @@ LOOP_LINHAS_IMAGEM_SAIDA:
     //
     // linha3 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2]
     //
+    // aqui podemos usar um unico LRD(WORD) e depois usar BFI e BFC, ganhando 1 ou 2 ciclos de clock
     ADD         R9, LR, R2
     
-    LDR         R7, [R9]
+    LDRB        R7, [LR, R2]
+    LDRB        R11, [R9, #0x1]
+    ADD         R7, R7, R11
+    LDRB        R9, [R9, #0x2]
+    ADD         R9, R9, R7
+    
+    /*LDR         R7, [R9]
     UBFX        R11, R9, #0x8, #0x8
     UBFX        R9, R7, #0x10, #0x8
     BFC         R7, #0x8, #0x18
     ADD         R7, R7, R11
-    ADD         R9, R9, R7
+    ADD         R9, R9, R7*/
     
     //
     // img_out[posicaoAtualSaida] = (((linha1 + linha2 + linha3) * (uint32_t)0xE38F) >> 17) >> 2

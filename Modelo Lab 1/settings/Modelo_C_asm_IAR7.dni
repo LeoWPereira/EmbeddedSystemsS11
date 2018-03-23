@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-1129084727
+Checksum=1642917848
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -46,10 +46,9 @@ mode=0
 [Breakpoints2]
 Bp0=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\main.c}.138.4" 0 0 1 "" 0 ""
 Bp1=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\main.c}.120.4" 0 0 1 "" 0 ""
-Bp2=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.26.1" 0 0 1 "" 0 ""
-Bp3=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.206.1" 0 0 1 "" 0 ""
-Bp4=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.38.1" 0 0 1 "" 0 ""
-Count=5
+Bp2=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.27.1" 0 0 1 "" 0 ""
+Bp3=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.228.1" 0 0 1 "" 0 ""
+Count=4
 [Interrupts]
 Enabled=1
 [MemConfig]
