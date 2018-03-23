@@ -223,7 +223,7 @@ uint8_t readPGM(FILE *fp,
    return 1;
 }
 
-uint32_t meanfilter3(uint16_t dim_x,
+/*uint32_t meanfilter3(uint16_t dim_x,
                      uint16_t dim_y,
                      uint8_t  img_in[],
                      uint8_t  img_out[])
@@ -274,10 +274,10 @@ uint32_t meanfilter3(uint16_t dim_x,
          img_out[posicaoAtualSaida] = (((linha1 + linha2 + linha3) * (uint32_t)0xE38F) >> 17) >> 2;
          //aux1 = img_out[posicaoAtualSaida];
          
-         /*if(aux1 != aux2)
-         {
-            printf("ERRO");
-         }*/
+         //if(aux1 != aux2)
+         //{
+         //   printf("ERRO");
+         //}
          
          totalPixelsImagemSaida++;
          
@@ -302,4 +302,4 @@ uint32_t meanfilter3(uint16_t dim_x,
    }
    
    return totalPixelsImagemSaida;
-}
+}*/

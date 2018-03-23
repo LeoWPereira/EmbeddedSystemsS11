@@ -1836,9 +1836,6 @@
   </configuration>
   <file>
     <name>$PROJ_DIR$\src\asm.s</name>
-    <excluded>
-      <configuration>Debug</configuration>
-    </excluded>
   </file>
   <file>
     <name>$PROJ_DIR$\src\main.c</name>
