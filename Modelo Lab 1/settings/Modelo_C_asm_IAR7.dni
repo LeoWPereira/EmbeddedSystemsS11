@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=1772498344
+Checksum=-1129084727
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -21,15 +21,13 @@ ShowTiming=128
 ShowArgs=0
 [Disassembly]
 MixedMode=1
-[MemConfig]
-Base=1
-Manual=0
-Ddf=1
-TypeViol=0
-Stop=1
-[Simulator]
-Freq=10000000
-MultiCoreRunAll=1
+[MemoryMap]
+Enabled=0
+Base=0
+UseAuto=0
+TypeViolation=1
+UnspecRange=1
+ActionState=1
 [InterruptLog]
 LogEnabled=0
 SumEnabled=0
@@ -46,23 +44,25 @@ ShowTimeSum=1
 [Disassemble mode]
 mode=0
 [Breakpoints2]
-Bp0=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\main.c}.141.4" 0 0 1 "" 0 ""
+Bp0=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\main.c}.138.4" 0 0 1 "" 0 ""
 Bp1=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\main.c}.120.4" 0 0 1 "" 0 ""
-Bp2=_ 0 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.212.7" 0 0 1 "" 0 ""
-Bp3=_ 0 "STD_CODE2" "{$PROJ_DIR$\src\main.c}.247.15" 0 0 1 "" 0 ""
-Bp4=_ 0 "STD_CODE2" "{$PROJ_DIR$\src\main.c}.304.6" 0 0 1 "" 0 ""
-Bp5=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.211.1" 0 0 1 "" 0 ""
-Bp6=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.26.1" 0 0 1 "" 0 ""
-Count=7
+Bp2=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.26.1" 0 0 1 "" 0 ""
+Bp3=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.206.1" 0 0 1 "" 0 ""
+Bp4=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.38.1" 0 0 1 "" 0 ""
+Count=5
 [Interrupts]
 Enabled=1
-[MemoryMap]
+[MemConfig]
+Base=1
+Manual=0
+Ddf=1
+TypeViol=0
+Stop=1
+[Trace1]
 Enabled=0
-Base=0
-UseAuto=0
-TypeViolation=1
-UnspecRange=1
-ActionState=1
+ShowSource=1
+[CallStackLog]
+Enabled=0
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -73,11 +73,9 @@ LogFile=_ ""
 [Aliases]
 Count=0
 SuppressDialog=0
-[Trace1]
-Enabled=0
-ShowSource=1
-[CallStackLog]
-Enabled=0
+[Simulator]
+Freq=10000000
+MultiCoreRunAll=1
 [DriverProfiling]
 Enabled=0
 Mode=1

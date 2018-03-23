@@ -130,7 +130,7 @@ int main()
    
    for(uint32_t i = 0; i < sizeFilteredImage; i++)
    {
-      fprintf(outFile, "%c", filteredImage[i]);
+      putc(filteredImage[i], outFile);
    }
    
    fclose(outFile);
@@ -222,84 +222,3 @@ uint8_t readPGM(FILE *fp,
    
    return 1;
 }
-
-/*uint32_t meanfilter3(uint16_t dim_x,
-                     uint16_t dim_y,
-                     uint8_t  img_in[],
-                     uint8_t  img_out[])
-{
-   /////////////////////
-   /// Variable Init ///
-   /////////////////////
-  
-   uint32_t totalPixelsImagemSaida = 0;
-   
-   uint16_t dim_x_imagem_saida = (dim_x - MASK_SIZE + 1);
-   uint16_t dim_y_imagem_saida = (dim_y - MASK_SIZE + 1);
-   
-   uint32_t posicaoAtualEntrada = 0;
-   uint32_t posicaoAtualSaida = 0;
-   
-   uint16_t linha1;
-   uint16_t linha2;
-   uint16_t linha3;
-   
-   uint16_t colunas = 0;
-   uint16_t linhas = 0;
-   
-   //uint32_t aux1 = 0;
-   //uint32_t aux2 = 0;
-   
-   ////////////
-   /// Code ///
-   ////////////
-   
-   for(; colunas < dim_x_imagem_saida; colunas++)
-   {
-      // init first two column sums
-      posicaoAtualEntrada = colunas + (linhas * dim_x);
-      linha1 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2]; // 11 ciclos de clock
-      
-      posicaoAtualEntrada += dim_x;
-      linha2 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2];
-         
-      for(; linhas < dim_y_imagem_saida; linhas++)
-      {           
-         posicaoAtualEntrada += dim_x;
-         linha3 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2];
-         
-         //img_out[posicaoAtualSaida] = (linha1 + linha2 + linha3) / 9;
-         //aux2 = img_out[posicaoAtualSaida];
-         
-         img_out[posicaoAtualSaida] = (((linha1 + linha2 + linha3) * (uint32_t)0xE38F) >> 17) >> 2;
-         //aux1 = img_out[posicaoAtualSaida];
-         
-         //if(aux1 != aux2)
-         //{
-         //   printf("ERRO");
-         //}
-         
-         totalPixelsImagemSaida++;
-         
-         /////////////////////////////////
-         /// Apenas Incrementa valores ///
-         /////////////////////////////////
-         
-         if(linhas < (dim_y_imagem_saida - 1))
-         {
-            posicaoAtualSaida += dim_x_imagem_saida;
-            
-            //////////////////////////////////////////////////////////
-            /// Por fim, apenas faz o shuffle das somas das linhas ///
-            //////////////////////////////////////////////////////////
-            linha1 = linha2;
-            linha2 = linha3;
-         }
-      }
-      
-      linhas = 0;
-      posicaoAtualSaida = (colunas + 1);
-   }
-   
-   return totalPixelsImagemSaida;
-}*/
