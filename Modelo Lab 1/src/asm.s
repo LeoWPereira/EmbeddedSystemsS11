@@ -63,7 +63,6 @@ meanfilter3:
    CMP          R6, #0x1
    BLT          ACABA_FILTRO
    
-   MOV          R6, R2
    LDRH         R10, [SP, #0x8]
    SUBS         R4, R3, #0x1
    STR          R4, [SP, #0x4]
@@ -76,7 +75,7 @@ LOOP_COLUNAS_IMAGEM_SAIDA:
     //
     // linha1 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2] 
     //
-    LDR         R12, [R6]
+    LDR         R12, [R2]
     UBFX        R4, R12, #0x8, #0x8
     UBFX        R9, R12, #0x10, #0x8
     BFC         R12, #0x8, #0x18
@@ -92,9 +91,7 @@ LOOP_COLUNAS_IMAGEM_SAIDA:
     // linha2 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2]
     //
     
-    ADD         R4, LR, R2
-       
-    LDR         R9, [R4]
+    LDR         R9, [LR, R2]
     UBFX        R7, R9, #0x8, #0x8
     UBFX        R4, R9, #0x10, #0x8
     BFC         R9, #0x8, #0x18
@@ -122,9 +119,7 @@ LOOP_LINHAS_IMAGEM_SAIDA:
     // linha3 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2]
     //
     
-    ADD         R9, LR, R2
-    
-    LDR         R7, [R9]
+    LDR         R7, [LR, R2]
     UBFX        R11, R7, #0x8, #0x8
     UBFX        R9, R7, #0x10, #0x8
     BFC         R7, #0x8, #0x18
