@@ -84,13 +84,13 @@ LOOP_COLUNAS_IMAGEM_SAIDA:
     //
     // posicaoAtualEntrada += dim_x
     //
-    MOV         LR, R10
+    //MOV         LR, R10
     
     //
     // linha2 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2]
     //
     
-    LDR         R9, [LR, R2]
+    LDR         R9, [R10, R2]
     UBFX        R7, R9, #0x8, #0x8
     UBFX        R4, R9, #0x10, #0x8
     BFC         R9, #0x8, #0x18
@@ -112,13 +112,13 @@ LOOP_LINHAS_IMAGEM_SAIDA:
     // posicaoAtualEntrada += dim_x
     //
     LDRH        R7, [SP, #0x8]
-    ADD         LR, LR, R7
+    ADD         R10, R10, R7
     
     //
     // linha3 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2]
     //
     
-    LDR         R7, [LR, R2]
+    LDR         R7, [R10, R2]
     UBFX        R11, R7, #0x8, #0x8
     UBFX        R9, R7, #0x10, #0x8
     BFC         R7, #0x8, #0x18
@@ -187,7 +187,8 @@ FIM_LOOP_LINHAS_IMAGEM_SAIDA:
     //
     // verifica loop colunas
     //
-    ADD         R10, R10, #0x1
+    MOV         R0, R8
+    MOV         R10, R0
     ADDS        R6, R6, #0x1
     
     LDR         R4, [SP]
