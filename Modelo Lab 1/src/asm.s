@@ -25,24 +25,23 @@
 meanfilter3:
    PUSH         {R0, R3-R11, LR}
    SUB          SP, SP, #0x8
-   MOV          R0, R1
+
+   //
+   // uint16_t dim_x_imagem_saida = (dim_x - MASK_SIZE + 1)
+   //
+   SUBS         R3, R0, #0x2 // 0x2 = MASK_SIZE - 1
+   STR          R3, [SP]
+
+   //
+   // uint16_t dim_y_imagem_saida = (dim_y - MASK_SIZE + 1)
+   //
+   SUBS         R3, R1, #0x2
    
+   MOV          R0, R1
    //
    // uint32_t totalPixelsImagemSaida = 0
    //
    MOVS         R1, #0
-   
-   //
-   // uint16_t dim_x_imagem_saida = (dim_x - MASK_SIZE + 1)
-   //
-   LDRH         R3, [SP, #0x8]
-   SUBS         R3, R3, #0x2 // 0x2 = MASK_SIZE - 1
-   STR          R3, [SP]
-   
-   //
-   // uint16_t dim_y_imagem_saida = (dim_y - MASK_SIZE + 1)
-   //
-   SUBS         R3, R0, #0x2
    
    //
    // uint32_t posicaoAtualSaida = 0
@@ -188,13 +187,12 @@ FIM_LOOP_LINHAS_IMAGEM_SAIDA:
     //
     // verifica loop colunas
     //
-    MOV         R0, R8
     ADD         R10, R10, #0x1
     ADDS        R6, R6, #0x1
     
     LDR         R4, [SP]
     
-    CMP         R0, R4
+    CMP         R8, R4
     BLT         LOOP_COLUNAS_IMAGEM_SAIDA
    
 ACABA_FILTRO:
