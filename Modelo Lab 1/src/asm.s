@@ -62,9 +62,11 @@ meanfilter3:
    MOV          R10, #0x1
    RSB          R4, R10, R3, LSR #0x10
    
-   LDRH         R10, [SP, #0x8]
-   
    STR          R4, [SP, #0x4]
+   
+   // R6 armazena agora o dim_x
+   LDRH        R6, [SP, #0x8]
+   MOV         R10, R6
    
   //
   // for(; colunas < dim_x_imagem_saida; colunas++)
@@ -80,10 +82,6 @@ LOOP_COLUNAS_IMAGEM_SAIDA:
     BFC         R12, #0x8, #0x18
     ADD         R12, R12, R4
     ADD         R12, R12, R9
-      
-    //
-    // posicaoAtualEntrada += dim_x
-    //
     
     //
     // linha2 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2]
@@ -113,8 +111,8 @@ LOOP_LINHAS_IMAGEM_SAIDA:
     //
     // posicaoAtualEntrada += dim_x
     //
-    LDRH        R7, [SP, #0x8]
-    ADD         R10, R10, R7
+    //LDRH        R7, [SP, #0x8]
+    ADD         R10, R10, R6
     
     //
     // linha3 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2]
@@ -194,7 +192,6 @@ FIM_LOOP_LINHAS_IMAGEM_SAIDA:
     //
     MOV         R0, R8
     MOV         R10, R0
-    ADDS        R6, R6, #0x1
     
     // carrega dim_x_imagem_saida em R4
     UBFX        R4, R3, #0x0, #0x10
