@@ -38,7 +38,9 @@ meanfilter3:
    MOVS         R1, #0
    
    // uint32_t posicaoAtualSaida = 0
-   MOV          R8, R1
+   // armazenado em R8 -> sempre mantem esse valor
+   //MOV          R8, R1
+   LDR          R8, [SP, #0xC]
    
    // uint16_t colunas = 0
    MOVS         R0, #0x0
@@ -111,8 +113,7 @@ LOOP_LINHAS_IMAGEM_SAIDA:
     MOV         R11, #0xE38F
     MUL         R7, R7, R11
     LSRS        R7, R7, #0x13
-    LDR         R11, [SP, #0xC]
-    STRB        R7, [R8, R11]
+    STRB        R7, [R8]
     
     // totalPixelsImagemSaida++
     ADDS        R1, R1, #0x1
@@ -123,7 +124,7 @@ LOOP_LINHAS_IMAGEM_SAIDA:
     
     // posicaoAtualSaida += dim_x_imagem_saida
     // carrega dim_x_imagem_saida em R7
-    UBFX         R7, R3, #0x0, #0x10
+    UBFX        R7, R3, #0x0, #0x10
     
     ADD         R8, R8, R7
     
@@ -149,10 +150,11 @@ FIM_LOOP_LINHAS_IMAGEM_SAIDA:
     MOVS         R5, #0x0
     
     // posicaoAtualSaida = (colunas + 1)
-    ADD         R8, R0, #0x1
+    ADD         R0, R0, #0x1
+    LDR         R8, [SP, #0xC]
+    ADD         R8, R8, R0
     
     // verifica loop colunas
-    MOV         R0, R8
     MOV         R10, R6
     
     // carrega dim_x_imagem_saida em R4
