@@ -38,8 +38,7 @@ meanfilter3:
    MOVS         R1, #0
    
    // uint32_t posicaoAtualSaida = 0
-   // armazenado em R8 -> sempre mantem esse valor
-   //MOV          R8, R1
+   // armazenado em R8 -> registrador com unico proposito de armazenar o endereco de saida do pixel em questao
    LDR          R8, [SP, #0xC]
    
    // uint16_t colunas = 0
@@ -104,6 +103,11 @@ LOOP_LINHAS_IMAGEM_SAIDA:
     BFC         R7, #0x8, #0x18
     ADD         R7, R7, R11
     ADD         R9, R9, R7
+    
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ///                 Neste ponto, eh importante ressaltar que eh possivel realizar uma divisao utilizando multiplicacao                       ///
+                /// O calculo eh complexo e esta explicado na referencia https://embeddedgurus.com/stack-overflow/2009/06/division-of-integers-by-constants/ ///
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     // img_out[posicaoAtualSaida] = (((linha1 + linha2 + linha3) * (uint32_t)0xE38F) >> 17) >> 2
     ADD         R7, R4, R12
