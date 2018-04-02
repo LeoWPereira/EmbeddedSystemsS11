@@ -87,6 +87,7 @@ LOOP_COLUNAS_IMAGEM_SAIDA:
     // linha2 = img_in[posicaoAtualEntrada] + img_in[posicaoAtualEntrada + 1] + img_in[posicaoAtualEntrada + 2]
     //
     
+    // Carrega em R9 a posicao inicial da linha1 + dim_x
     LDR         R9, [R10, R2]
     UBFX        R7, R9, #0x8, #0x8
     UBFX        R4, R9, #0x10, #0x8
@@ -111,7 +112,6 @@ LOOP_LINHAS_IMAGEM_SAIDA:
     //
     // posicaoAtualEntrada += dim_x
     //
-    //LDRH        R7, [SP, #0x8]
     ADD         R10, R10, R6
     
     //
@@ -131,6 +131,8 @@ LOOP_LINHAS_IMAGEM_SAIDA:
     ADD         R7, R4, R12
     ADD         R7, R7, R9
     // Realiza divisao a partir de multiplicacao e shift
+    //MOV         R11, #0x9
+    //SDIV        R7, R7, R11  ; Signed divide, R7 = R7/R11
     MOV         R11, #0xE38F
     MUL         R7, R7, R11
     LSRS        R7, R7, #0x13
@@ -178,6 +180,11 @@ FIM_LOOP_COLUNAS_IMAGEM_SAIDA:
 FIM_LOOP_LINHAS_IMAGEM_SAIDA:
     
     //
+    // Adiciona #0x1 na posicao inicial de leitura R2
+    //
+    ADD          R2, R2, #0x1
+    
+    //
     // linhas = 0
     //
     MOVS         R5, #0x0
@@ -191,7 +198,7 @@ FIM_LOOP_LINHAS_IMAGEM_SAIDA:
     // verifica loop colunas
     //
     MOV         R0, R8
-    MOV         R10, R0
+    MOV         R10, R6
     
     // carrega dim_x_imagem_saida em R4
     UBFX        R4, R3, #0x0, #0x10
