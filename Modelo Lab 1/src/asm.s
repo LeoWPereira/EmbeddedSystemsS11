@@ -111,7 +111,6 @@ LOOP_LINHAS_IMAGEM_SAIDA:
     //
     // posicaoAtualEntrada += dim_x
     //
-    //LDRH        R7, [SP, #0x8]
     ADD         R10, R10, R6
     
     //

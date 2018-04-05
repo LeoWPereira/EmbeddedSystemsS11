@@ -193,6 +193,11 @@ uint8_t readPGM(FILE *fp,
    //check for comments
    uint8_t c = getc(fp);
    
+   if(c != '#')
+   {
+      c = getc(fp);
+   }
+   
    while (c == '#') 
    {
       while (getc(fp) != '\n');
