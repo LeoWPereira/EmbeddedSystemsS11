@@ -26,12 +26,12 @@
 #define P2                    2
 #define P5                    5
 
-//#define PGM_FILENAME           "teste5x5.pgm"
-//#define PGM_FILENAME_OUT       "teste5x5_FILTERED.pgm"
+#define PGM_FILENAME           "teste5x5.pgm"
+#define PGM_FILENAME_OUT       "teste5x5_FILTERED.pgm"
 //#define PGM_FILENAME           "teste24x7.pgm"
 //#define PGM_FILENAME_OUT       "teste24x7_FILTERED.pgm"
-#define PGM_FILENAME             "binary.pgm"
-#define PGM_FILENAME_OUT         "binary_FILTERED.pgm"
+//#define PGM_FILENAME             "binary.pgm"
+//#define PGM_FILENAME_OUT         "binary_FILTERED.pgm"
 //#define PGM_FILENAME             "lena512.pgm"
 //#define PGM_FILENAME_OUT         "lena512_FILTERED.pgm"
 

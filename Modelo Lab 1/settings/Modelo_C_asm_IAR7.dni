@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=773847994
+Checksum=-1142274955
 [CodeCoverage]
 Enabled=_ 0
 [Exceptions]
@@ -61,12 +61,13 @@ ShowTimeSum=1
 [Disassemble mode]
 mode=0
 [Breakpoints2]
-Bp0=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.26.2" 0 0 1 "" 0 ""
+Bp0=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.26.1" 0 0 1 "" 0 ""
 Bp1=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\main.c}.120.4" 0 0 1 "" 0 ""
 Bp2=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\main.c}.136.4" 0 0 1 "" 0 ""
-Bp3=_ 0 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.120.2" 0 0 1 "" 0 ""
-Bp4=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.203.2" 0 0 1 "" 0 ""
-Count=5
+Bp3=_ 0 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.120.1" 0 0 1 "" 0 ""
+Bp4=_ 0 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.176.8" 0 0 1 "" 0 ""
+Bp5=_ 1 "STD_CODE2" "{$PROJ_DIR$\src\asm.s}.171.1" 0 0 1 "" 0 ""
+Count=6
 [Interrupts]
 Enabled=1
 [MemoryMap]

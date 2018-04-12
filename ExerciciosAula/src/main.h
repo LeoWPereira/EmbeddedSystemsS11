@@ -25,4 +25,8 @@
 
 /* Externable Functions Definition -------------------------------------------*/
 
+extern void Aula03_Ex01(void);
+extern void Aula03_Ex02(void);
+extern void Aula03_Ex03(void);
+
 #endif /* __MAIN_H */

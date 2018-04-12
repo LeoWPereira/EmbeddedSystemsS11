@@ -47,5 +47,9 @@
 
 int main()
 {  
-   return 0;
+    //Aula03_Ex01();
+    //Aula03_Ex02();
+    Aula03_Ex03();
+  
+    return 0;
 }
