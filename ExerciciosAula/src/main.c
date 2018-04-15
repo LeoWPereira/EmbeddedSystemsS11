@@ -49,7 +49,19 @@ int main()
 {  
     //Aula03_Ex01();
     //Aula03_Ex02();
-    Aula03_Ex03();
+    
+    //unsigned long long valor = Aula03_Ex03(0xFFFFFFFF,
+    //                                       9);
   
+    /*int m = 5;
+    int A[5] = {1, 2, 3, 4, 5};
+    int B[5] = {1, -1, 1, -1, 1};
+    int S[5];
+  
+    soma_vet(m, 
+             A,
+             B,
+             S);*/
+    
     return 0;
 }

@@ -1,24 +1,26 @@
 /**
- *
+ * Laboratorio02
+ * Juliano
+ * Leonardo Winter Pereira
+ * Rodrigo Yudi Endo
  */
 
 #include "Timer.h"
 
 void main(void)
 {
-  //
+  //////////////////////////
+  /// Inicializa Sistema ///
+  //////////////////////////
   SystemCoreClockUpdate();
   
-  //
   GPIOInit();
   
-  //
   SSPInit();
   
-  //
   oled_init();
   
-  //
+  // Inicializa o Timer
   timer_inicializarTimer(0);
   
   //

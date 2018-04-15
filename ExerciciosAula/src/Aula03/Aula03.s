@@ -81,10 +81,9 @@ Aula03_Ex02:
  
  /**
  * @brief   
- * @param   R0 : 
- * @param   R1 : 
- * @param   R2 : 
- * @retval  R0 : 
+ * @param   R0 : O valor a ser multiplicado
+ * @param   R1 : O numero de vezes a se multiplicar
+ * @retval  R0, R1 : O resultado final (Low, High)
  */
 Aula03_Ex03:
   push          {R4-R11, LR}
@@ -92,25 +91,34 @@ Aula03_Ex03:
   // Multiplica valor em R3(32 bits) por 9 
   // Lembrando que a multiplicação pode causar overflow
   // precisamos usar UMULL
-  mov           R3, #0xFFFFFFFF
-  mov           R2, #0x9
-  umull         R0, R1, R3, R2
+  //umull         R2, R3, R0, R1
   
   // usando um loop de somas
-  mov           R3, #0xFFFFFFFF
-  mov           R2, #0x9
   mov           R4, #0x0 // armazena a quantidade de vezes que ja somou (para cmp do loop)
   
-  mov           R1, #0x0 // armazena a soma (Lowest 32 bits)
-  mov           R0, #0x0 // armazena a soma (highest 32 bits)
+  mov           R2, #0x0 // armazena a soma (Lowest 32 bits)
+  mov           R3, #0x0 // armazena a soma (highest 32 bits)
 REALIZA_SOMA:
-  adds          R1, R1, R3
+  adds          R2, R2, R0
   
+  // verifica se teve overflow, se sim, soma 1 em R0
+  // basta verificar se o bit de carry esta ativo, se sim, teve overflow
   
+  bcc           SEM_OVERFLOW
   
+  add           R3, R3, #0x1
+  
+SEM_OVERFLOW:
   add           R4, R4, #0x1
-  cmp           R4, R2
+  cmp           R4, R1
   bneq          REALIZA_SOMA
+  
+  ///////////////////////////////////////////////////////////////////////////////
+  /// Apenas carrega o valor dos registradores para voltar a funcao chamadora ///
+  ///////////////////////////////////////////////////////////////////////////////
+  
+  mov           R1, R3
+  mov           R0, R2
   
   pop           {R4-R11, PC}
       

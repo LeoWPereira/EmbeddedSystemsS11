@@ -27,6 +27,10 @@
 
 extern void Aula03_Ex01(void);
 extern void Aula03_Ex02(void);
-extern void Aula03_Ex03(void);
+
+extern unsigned long long Aula03_Ex03(uint32_t valorASerMultiplicado,
+                                      uint32_t numeroDeVezes);
+
+extern void soma_vet(int m, int A[], int B[], int S[]);
 
 #endif /* __MAIN_H */
