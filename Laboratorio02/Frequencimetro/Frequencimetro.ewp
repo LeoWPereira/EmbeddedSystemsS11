@@ -351,6 +351,7 @@
                     <state>$PROJ_DIR$\..\Lib_MCU\inc</state>
                     <state>C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Core\Include</state>
                     <state>C:\Users\leona\Documents\Personal_Projects\EmbeddedSystemsS11\Laboratorio02\Frequencimetro\src\Timer</state>
+                    <state>C:\Users\leona\Documents\Personal_Projects\EmbeddedSystemsS11\Laboratorio02\Frequencimetro\src\Auxiliares</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2043,6 +2044,18 @@
             <data />
         </settings>
     </configuration>
+    <group>
+        <name>Auxiliares</name>
+        <file>
+            <name>$PROJ_DIR$\src\Auxiliares\Auxiliar.c</name>
+        </file>
+    </group>
+    <group>
+        <name>GPIO</name>
+        <file>
+            <name>$PROJ_DIR$\src\GPIO\gpio.c</name>
+        </file>
+    </group>
     <group>
         <name>Timer</name>
         <file>

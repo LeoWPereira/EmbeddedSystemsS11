@@ -90,7 +90,7 @@ void PIOINT1_IRQHandler(void)
 ** Returned value:		None
 ** 
 *****************************************************************************/
-void PIOINT2_IRQHandler(void)
+__weak void PIOINT2_IRQHandler(void)
 {
   uint32_t regVal;
 

@@ -17,23 +17,26 @@
  * DEFINICOES DE TIPOS E ESTRUTURAS
  ****************************************************************************************/
 
-#define D_TIMER_TICKS_PER_SEC_HOST                 1    // 1 Hz (1 s)
-#define D_TIMER_TICKS_PER_SEC_SSP                  500  // 500 Hz (2 ms)
-#define D_TIMER_TICKS_PER_SEC_PPS_SMART_6L         20   // 20 Hz (50 ms)
-#define D_TIMER_TICKS_PER_SEC_20_HZ                20   // 20 Hz (50 ms)
+#define TIMER_INTERRUPCAO       LPC_TMR32B0
+#define TIMER_COUNTER           LPC_TMR16B1
 
 /****************************************************************************************
  * VARIAVEIS EXTERNAVEIS
  ****************************************************************************************/
 
+extern uint32_t frequencyCounter;
+
 /****************************************************************************************
  * DEFINICOES DE FUNCOES EXTERNAVEIS
  ****************************************************************************************/
 
-extern uint8_t timer_inicializarTimer(uint8_t timerNum);
+extern uint8_t timer_inicializarTimer(LPC_TMR_TypeDef* timer,
+                                      uint16_t periodSeg,
+                                      uint16_t periodMs,
+                                      uint16_t periodUs);
 
-extern void timer_ConfigurarTick1Sec(void);
+extern uint8_t timer_habilitaTimer(LPC_TMR_TypeDef* timer);
 
-extern void timer_ConfigurarTickSsp(void);
+extern uint8_t timer_desabilitaTimer(LPC_TMR_TypeDef* timer);
 
 #endif
