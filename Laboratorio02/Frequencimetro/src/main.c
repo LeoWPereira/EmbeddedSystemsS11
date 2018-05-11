@@ -46,6 +46,22 @@ void main(void)
     
     if(ucFlagPrintFrequencyScale)
     {
+      /*if(frequencyScale == KILO_HERTZ)
+      {
+        timer_inicializarTimer(TIMER_INTERRUPCAO,
+                               0,
+                               1,
+                               0);
+      }
+      
+      else if(frequencyScale == HERTZ)
+      {
+        timer_inicializarTimer(TIMER_INTERRUPCAO,
+                               1,
+                               0,
+                               0);
+      }*/
+      
       // analisamos a escala de frequencia selecionada e imprimimos no display
       analyseAndPrintFrequencyScale(DISPLAY_LAST_LINE);
       

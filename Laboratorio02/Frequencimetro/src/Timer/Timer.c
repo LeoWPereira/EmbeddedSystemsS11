@@ -34,6 +34,8 @@ uint32_t frequencyCounter = 0;
  * VARIAVEIS GLOBAIS
  ****************************************************************************************/
 
+static uint16_t printCounterKHz = 0;
+
 /****************************************************************************************
  * DEFINICOES DE FUNCOES EXTERNAVEIS
  ****************************************************************************************/
@@ -42,14 +44,27 @@ uint32_t frequencyCounter = 0;
  * 
  */
 void TIMER32_0_IRQHandler(void)
-{
-   // clear interrupt flag
-   LPC_TMR32B0->IR = 1;			
-   
-   //frequencyCounter++;
- 
-   ucFlagPrintFrequency = DEF_TRUE;
-   
+{    
+    frequencyCounter = TIMER_COUNTER->TC;
+     
+    TIMER_COUNTER->TCR = 0x02;
+    TIMER_COUNTER->TCR = 0x01;
+  
+    // clear interrupt flag
+    LPC_TMR32B0->IR = 1;	
+    
+    if((frequencyScale == HERTZ) || (printCounterKHz == 1000))
+    {
+      ucFlagPrintFrequency = DEF_TRUE;
+      
+      printCounterKHz = 0;
+    }
+    
+    else if(frequencyScale == KILO_HERTZ)
+    {
+        printCounterKHz++;
+    }
+  
    return;
 }
 
@@ -58,7 +73,7 @@ void TIMER32_0_IRQHandler(void)
  */
 void TIMER16_1_IRQHandler(void)
 {
-  frequencyCounter++;
+  //frequencyCounter++;
   
   return;
 }
