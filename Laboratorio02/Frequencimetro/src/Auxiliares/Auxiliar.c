@@ -1,3 +1,5 @@
+#include "Auxiliar.h"
+
 void intToString(int value, 
                  uint8_t* pBuf, 
                  uint32_t len, 

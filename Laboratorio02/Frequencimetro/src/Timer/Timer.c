@@ -44,7 +44,7 @@ static uint16_t printCounterKHz = 0;
  * 
  */
 void TIMER32_0_IRQHandler(void)
-{    
+{
     frequencyCounter = TIMER_COUNTER->TC;
      
     TIMER_COUNTER->TCR = 0x02;
@@ -53,7 +53,7 @@ void TIMER32_0_IRQHandler(void)
     // clear interrupt flag
     LPC_TMR32B0->IR = 1;	
     
-    if((frequencyScale == HERTZ) || (printCounterKHz == 1000))
+    if((frequencyScale == HERTZ) || (printCounterKHz == PERIODO_INTERRUPCAO_KHERZ))
     {
       ucFlagPrintFrequency = DEF_TRUE;
       
@@ -66,24 +66,6 @@ void TIMER32_0_IRQHandler(void)
     }
   
    return;
-}
-
-/**
- *
- */
-void TIMER16_1_IRQHandler(void)
-{
-  //frequencyCounter++;
-  
-  return;
-}
-
-/**
- * 
- */
-void TIMER32_1_IRQHandler(void)
-{
-  return;
 }
 
 /**

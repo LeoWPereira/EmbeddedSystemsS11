@@ -8,11 +8,19 @@
 #include "Timer.h"
 #include "Auxiliar.h"
 
+/****************************************************************************************
+* VARIAVEIS EXTERNAVEIS
+****************************************************************************************/
+
 uint8_t frequencyScale = HERTZ;
 
 uint8_t ucFlagPrintFrequency = DEF_TRUE;
 
 uint8_t ucFlagPrintFrequencyScale = DEF_TRUE;
+
+/****************************************************************************************
+ * DEFINICOES DE FUNCOES EXTERNAVEIS
+ ****************************************************************************************/
 
 static void SystemStart(void);
 
@@ -45,23 +53,7 @@ void main(void)
     }
     
     if(ucFlagPrintFrequencyScale)
-    {
-      /*if(frequencyScale == KILO_HERTZ)
-      {
-        timer_inicializarTimer(TIMER_INTERRUPCAO,
-                               0,
-                               1,
-                               0);
-      }
-      
-      else if(frequencyScale == HERTZ)
-      {
-        timer_inicializarTimer(TIMER_INTERRUPCAO,
-                               1,
-                               0,
-                               0);
-      }*/
-      
+    {      
       // analisamos a escala de frequencia selecionada e imprimimos no display
       analyseAndPrintFrequencyScale(DISPLAY_LAST_LINE);
       
@@ -135,7 +127,7 @@ void printFrequency(void)
   {
     oled_putString(60,
                    DISPLAY_FREQUENCY_LINE,
-                   (uint8_t *)"Hz",
+                   (uint8_t *)" Hz ",
                    OLED_COLOR_BLACK, 
                    OLED_COLOR_WHITE);
   }
@@ -144,7 +136,7 @@ void printFrequency(void)
   {
     oled_putString(60,
                    DISPLAY_FREQUENCY_LINE,
-                   (uint8_t *)"kHz",
+                   (uint8_t *)" kHz",
                    OLED_COLOR_BLACK, 
                    OLED_COLOR_WHITE);
   }

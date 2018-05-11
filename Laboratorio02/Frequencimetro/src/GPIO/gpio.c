@@ -9,7 +9,7 @@ void PIOINT2_IRQHandler(void)
   {
     GPIOIntClear(PORT2, 
                  9);
-  }	
+  }
   
   if(!ucFlagPrintFrequencyScale)
   {
@@ -35,5 +35,6 @@ void PIOINT2_IRQHandler(void)
                                 
     ucFlagPrintFrequencyScale = DEF_TRUE;
   }
+  
   return;
 }
