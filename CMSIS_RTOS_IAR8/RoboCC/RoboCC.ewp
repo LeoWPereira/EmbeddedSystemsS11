@@ -32,11 +32,11 @@
                 </option>
                 <option>
                     <name>Input description</name>
-                    <state></state>
+                    <state>Full formatting, without multibyte support.</state>
                 </option>
                 <option>
                     <name>Output description</name>
-                    <state></state>
+                    <state>Full formatting, without multibyte support.</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -44,7 +44,7 @@
                 </option>
                 <option>
                     <name>OGCoreOrChip</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>GRuntimeLibSelect</name>
@@ -58,7 +58,7 @@
                 </option>
                 <option>
                     <name>RTDescription</name>
-                    <state></state>
+                    <state>Use the normal configuration of the C/C++ runtime library. No locale interface, C locale, no file descriptor support, no multibytes in printf and scanf, and no hex floats in strtod.</state>
                 </option>
                 <option>
                     <name>OGProductVersion</name>
@@ -78,7 +78,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>Default	None</state>
+                    <state>LPC1343	NXP LPC1343</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -138,7 +138,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>Default	None</state>
+                    <state>LPC1343	NXP LPC1343</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -344,7 +344,13 @@
                 </option>
                 <option>
                     <name>CCIncludePath2</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\..</state>
+                    <state>$PROJ_DIR$\..\Device\NXP\LPC13xx\Include\</state>
+                    <state>$PROJ_DIR$\..\Drivers\include</state>
+                    <state>$PROJ_DIR$\..\Lib_EaBaseBoard\inc</state>
+                    <state>$PROJ_DIR$\..\Lib_MCU\inc</state>
+                    <state>$PROJ_DIR$\..\RTOS\RTX\INC</state>
+                    <state>C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Core\Include</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -590,7 +596,7 @@
                 </option>
                 <option>
                     <name>AOutputFile</name>
-                    <state></state>
+                    <state>$FILE_BNAME$.o</state>
                 </option>
                 <option>
                     <name>ALimitErrorsCheck</name>
@@ -759,7 +765,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state></state>
+                    <state>$TOOLKIT_DIR$\config\linker\NXP\LPC1343.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -819,7 +825,7 @@
                 </option>
                 <option>
                     <name>IlinkProgramEntryLabel</name>
-                    <state></state>
+                    <state>__iar_program_start</state>
                 </option>
                 <option>
                     <name>DoFill</name>
@@ -2037,7 +2043,31 @@
             <data />
         </settings>
     </configuration>
+    <group>
+        <name>Configs</name>
+        <file>
+            <name>$PROJ_DIR$\src\RTX_Conf_CM.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Device\NXP\LPC13xx\Source\IAR\startup_LPC13xx.s</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Device\NXP\LPC13xx\Source\system_LPC13xx.c</name>
+        </file>
+    </group>
+    <group>
+        <name>Libraries</name>
+        <file>
+            <name>$PROJ_DIR$\..\Lib_EaBaseBoard\Debug\Exe\Lib_EaBaseBoard.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Lib_MCU\Debug\Exe\Lib_MCU.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\RTOS\RTX\SRC\IAR\CM3_LE\RTX_Lib_CM.a</name>
+        </file>
+    </group>
     <file>
-        <name>$PROJ_DIR$\main.c</name>
+        <name>$PROJ_DIR$\src\main.c</name>
     </file>
 </project>
