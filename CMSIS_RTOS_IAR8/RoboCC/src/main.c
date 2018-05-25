@@ -39,13 +39,19 @@ osThreadDef(thread_control,
             1, 
             0);
 
+static void SystemStart(void);
+
 /**
  *
  */
 int main()
 {
   osKernelInitialize();
+  
   SystemInit();
+  
+  //
+  SystemStart();
   
   // System thread initialization
   thread_Timer_id = osThreadCreate(osThread(thread_timer), 
@@ -67,4 +73,39 @@ int main()
   osDelay(osWaitForever);
   
   return 0;
+}
+
+void SystemStart(void)
+{
+  //
+  SystemCoreClockUpdate();
+  
+  // Inicializa General I/O
+  GPIOInit();
+  
+  // Inicializa SSP (necessario para oled)
+  SSPInit();
+  
+  // Inicializa o Timer 0 (LPC_CT32B0_BASE)
+  /*timer_inicializarTimer(TIMER_INTERRUPCAO,
+                         1,
+                         0,
+                         0);
+
+  // Inicializa o Timer 0 (LPC_CT32B0_BASE)
+  timer_inicializarTimer(TIMER_COUNTER,
+                         0,
+                         0,
+                         0);*/
+  
+  GPIOSetInterrupt(PORT2,
+                   9,
+                   1,
+                   0,
+                   0);
+  
+  GPIOIntEnable(PORT2, 
+                9);
+  
+  return;
 }
