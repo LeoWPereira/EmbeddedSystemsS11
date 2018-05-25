@@ -351,6 +351,12 @@
                     <state>$PROJ_DIR$\..\Lib_MCU\inc</state>
                     <state>$PROJ_DIR$\..\RTOS\RTX\INC</state>
                     <state>C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\CMSIS\Core\Include</state>
+                    <state>$PROJ_DIR$\src\Auxiliares</state>
+                    <state>$PROJ_DIR$\src\Control</state>
+                    <state>$PROJ_DIR$\src\Encoder</state>
+                    <state>$PROJ_DIR$\src\GUI</state>
+                    <state>$PROJ_DIR$\src\PWM</state>
+                    <state>$PROJ_DIR$\src\Timer</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
