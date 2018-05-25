@@ -259,7 +259,7 @@
                 </option>
                 <option>
                     <name>CCDiagSuppress</name>
-                    <state></state>
+                    <state>Pa181</state>
                 </option>
                 <option>
                     <name>CCDiagRemark</name>
@@ -336,7 +336,7 @@
                 </option>
                 <option>
                     <name>PreInclude</name>
-                    <state></state>
+                    <state>C:\Users\leona\Documents\Personal_Projects\EmbeddedSystemsS11\CMSIS_RTOS_IAR8\RoboCC\src\main.h</state>
                 </option>
                 <option>
                     <name>CompilerMisraOverride</name>
@@ -2068,6 +2068,24 @@
         </file>
     </group>
     <file>
+        <name>$PROJ_DIR$\src\Auxiliares\Auxiliar.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\src\Control\control.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\src\Encoder\encoder.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\src\GUI\gui.c</name>
+    </file>
+    <file>
         <name>$PROJ_DIR$\src\main.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\src\PWM\pwm.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\src\Timer\timer.c</name>
     </file>
 </project>
