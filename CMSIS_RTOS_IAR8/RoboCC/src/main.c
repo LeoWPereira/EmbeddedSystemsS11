@@ -14,6 +14,7 @@ osThreadId thread_GUI_id;
 osThreadId thread_Encoder_id;
 osThreadId thread_Control_id;
 osThreadId thread_PWM_id;
+osThreadId thread_GPIO_id;
 
 osThreadDef(thread_timer, 
             osPriorityNormal, 
@@ -36,6 +37,11 @@ osThreadDef(thread_encoder,
             0);
 
 osThreadDef(thread_control, 
+            osPriorityNormal, 
+            1, 
+            0);
+
+osThreadDef(thread_gpio, 
             osPriorityNormal, 
             1, 
             0);
@@ -70,6 +76,10 @@ int main()
   thread_PWM_id = osThreadCreate(osThread(thread_pwm), 
                                  NULL);
   */
+  
+  thread_GPIO_id = osThreadCreate(osThread(thread_gpio), 
+                                  NULL);
+  
   osKernelStart();
   osDelay(osWaitForever);
   

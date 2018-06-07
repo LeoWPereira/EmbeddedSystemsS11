@@ -38,4 +38,6 @@
  * DEFINICOES DE TIPOS E ESTRUTURAS
  ****************************************************************************************/
 
+extern void thread_gpio(void const *argument);
+
 #endif

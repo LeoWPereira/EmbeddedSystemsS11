@@ -29,8 +29,6 @@ settings
 
 *.rej
 *.dep
-*.eww
-*.ewt
 *.dep
 *.log
 *.xcl

@@ -7,7 +7,7 @@ osMessageQDef(pwmMessage_q,
               PWM_MESSAGES);
 
 // Declare an ID for the message queue
-osMessageQId(pwmMessage_q_id);
+osMessageQId pwmMessage_q;
 
 /**
  *
