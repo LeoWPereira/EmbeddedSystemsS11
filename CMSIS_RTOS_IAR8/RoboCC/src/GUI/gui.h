@@ -16,13 +16,12 @@
 /****************************************************************************************
  * DEFINICOES DE TIPOS E ESTRUTURAS
  ****************************************************************************************/
-
-extern osMessageQId guiMessage_q_id;
    
 typedef enum 
 {
   INIT_DISPLAY,
-  CHANGE_SCREEN
+  CHANGE_SCREEN,
+  UPDATE_SCREEN
 } GUI_MESSAGES;
 
 /****************************************************************************************
@@ -30,5 +29,7 @@ typedef enum
  ****************************************************************************************/
 
 extern void thread_gui(void const *argument);
+
+extern void thread_gui_writeMessage(GUI_MESSAGES message);
 
 #endif

@@ -1,4 +1,12 @@
+#include "gpio.h"
 #include "gui.h"
+
+// Declare a message queue
+osMessageQDef(gpioMessage_q,
+              5,
+              GUI_MESSAGES);
+
+osMessageQId gpioMessage_q;
 
 void PIOINT2_IRQHandler(void)
 {
@@ -11,9 +19,7 @@ void PIOINT2_IRQHandler(void)
                  9);
   }
   
-  osMessagePut(guiMessage_q_id,
-               (uint32_t)INIT_DISPLAY,
-               osWaitForever);
+  thread_gui_writeMessage(CHANGE_SCREEN);
   
   return;
 }

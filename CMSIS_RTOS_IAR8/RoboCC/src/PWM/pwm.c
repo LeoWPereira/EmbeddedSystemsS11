@@ -1,4 +1,5 @@
 #include "pwm.h"
+#include "gpio.h"
 
 // Declare a message queue
 osMessageQDef(pwmMessage_q,
@@ -36,6 +37,15 @@ void thread_pwm(void const *argument)
       }
     }
   }
+  
+  return;
+}
+
+void thread_pwm_writeMessage(PWM_MESSAGES message)
+{
+  osMessagePut(pwmMessage_q_id,
+               (uint32_t)message,
+               osWaitForever);
   
   return;
 }

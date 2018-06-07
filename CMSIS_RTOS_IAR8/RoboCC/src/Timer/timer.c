@@ -1,40 +1,18 @@
 #include "timer.h"
+#include "gui.h"
 
-// Declare a message queue
-osMessageQDef(timerMessage_q,
-              5,
-              TIMER_MESSAGES);
-
-// Declare an ID for the message queue
-osMessageQId(timerMessage_q_id);
+static uint32_t globalTime = 0;
 
 /**
  *
  */
 void thread_timer(void const *argument)
 {
-  osEvent event;
-  
-  // create the message queue inside the thread
-  timerMessage_q_id = osMessageCreate(osMessageQ(timerMessage_q),
-                                      NULL);
-  
   while(DEF_TRUE)
   {
-    event = osMessageGet(timerMessage_q_id, 
-                         osWaitForever);
+    osDelay(100);
     
-    if(event.status == osEventMessage)
-    {
-      switch(event.value.v)
-      {
-        case INIT_TIMER:
-          break;
-
-        default:
-          break;
-      }
-    }
+    thread_gui_writeMessage(UPDATE_SCREEN);
   }
   
   return;

@@ -7,6 +7,7 @@
 #include "gui.h"
 #include "pwm.h"
 #include "timer.h"
+#include "gpio.h"
 
 osThreadId thread_Timer_id;
 osThreadId thread_GUI_id;
@@ -57,18 +58,18 @@ int main()
   thread_Timer_id = osThreadCreate(osThread(thread_timer), 
                                    NULL);
   
-  thread_GUI_id = osThreadCreate(osThread(thread_pwm), 
+  thread_GUI_id = osThreadCreate(osThread(thread_gui), 
                                  NULL);
   
-  thread_Encoder_id = osThreadCreate(osThread(thread_gui), 
+  thread_Encoder_id = osThreadCreate(osThread(thread_encoder), 
+                                     NULL);
+  /*
+  thread_Control_id = osThreadCreate(osThread(thread_control), 
                                      NULL);
   
-  thread_Control_id = osThreadCreate(osThread(thread_encoder), 
-                                     NULL);
-  
-  thread_PWM_id = osThreadCreate(osThread(thread_control), 
+  thread_PWM_id = osThreadCreate(osThread(thread_pwm), 
                                  NULL);
-  
+  */
   osKernelStart();
   osDelay(osWaitForever);
   

@@ -17,8 +17,6 @@
  * DEFINICOES DE TIPOS E ESTRUTURAS
  ****************************************************************************************/
 
-extern osMessageQId pwmMessage_q_id;
-   
 typedef enum 
 {
   INIT_PWM
@@ -29,5 +27,7 @@ typedef enum
  ****************************************************************************************/
 
 extern void thread_pwm(void const *argument);
+
+extern void thread_pwm_writeMessage(PWM_MESSAGES message);
 
 #endif

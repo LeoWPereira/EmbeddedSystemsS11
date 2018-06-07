@@ -16,8 +16,7 @@
 
 #include "mcu_regs.h"
 #include "type.h"
-#include "oled.h"
-#include "gpio.h"
+
 #include "ssp.h"
 
 /****************************************************************************************

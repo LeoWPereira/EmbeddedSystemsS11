@@ -1,12 +1,12 @@
 #include "gui.h"
+#include "oled.h"
 
 // Declare a message queue
 osMessageQDef(guiMessage_q,
               5,
               GUI_MESSAGES);
 
-// Declare an ID for the message queue
-osMessageQId(guiMessage_q_id);
+osMessageQId guiMessage_q;
 
 static void guiInit(void);
 
@@ -20,16 +20,14 @@ void thread_gui(void const *argument)
   osEvent event;
   
   // create the message queue inside the thread
-  guiMessage_q_id = osMessageCreate(osMessageQ(guiMessage_q),
-                                    NULL);
+  guiMessage_q = osMessageCreate(osMessageQ(guiMessage_q),
+                                 NULL);
   
-  osMessagePut(guiMessage_q_id,
-               (uint32_t)INIT_DISPLAY,
-               osWaitForever);
+  thread_gui_writeMessage(INIT_DISPLAY);
   
   while(DEF_TRUE)
   {
-    event = osMessageGet(guiMessage_q_id, 
+    event = osMessageGet(guiMessage_q, 
                          osWaitForever);
     
     if(event.status == osEventMessage)
@@ -38,6 +36,7 @@ void thread_gui(void const *argument)
       {
         case INIT_DISPLAY:
           guiInit();
+         
           break;
           
         case CHANGE_SCREEN:
@@ -84,6 +83,15 @@ void guiChangeScreen(void)
                  (uint8_t*)"Leo Boboca",
                  OLED_COLOR_BLACK, 
                  OLED_COLOR_WHITE);
+  
+  return;
+}
+
+void thread_gui_writeMessage(GUI_MESSAGES message)
+{
+  osMessagePut(guiMessage_q,
+               (uint32_t)message,
+               osWaitForever);
   
   return;
 }

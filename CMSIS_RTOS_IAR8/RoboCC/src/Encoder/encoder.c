@@ -18,7 +18,7 @@ void thread_encoder(void const *argument)
   // create the message queue inside the thread
   encoderMessage_q_id = osMessageCreate(osMessageQ(encoderMessage_q),
                                         NULL);
-  
+   
   while(DEF_TRUE)
   {
     event = osMessageGet(encoderMessage_q_id, 
