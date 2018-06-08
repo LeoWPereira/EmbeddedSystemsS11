@@ -1,5 +1,6 @@
 #include "gpio.h"
 #include "gui.h"
+#include "control.h"
 
 // Declare a message queue
 osMessageQDef(gpioMessage_q,
@@ -10,7 +11,7 @@ osMessageQId gpioMessage_q;
 
 static uint8_t changeScreenButton = 0;
 
-static uint8_t KeypadGetKey(void);
+static void KeypadGetKey(void);
 
 static void configPUPD(void);
 
@@ -105,11 +106,9 @@ void configPUPD(void)
   return;
 }
 
-uint8_t KeypadGetKey(void)
+void KeypadGetKey(void)
 {
     static uint8_t STATE_MACHINE = 0;
-    
-    uint8_t charreturn;
     
     if(STATE_MACHINE == 0)
     {
@@ -135,19 +134,19 @@ uint8_t KeypadGetKey(void)
       if (!GPIOGetValue(PORT2,
                  0))
       {
-          charreturn = '1';
+          //charreturn = '1';
       }
       
       else if (!GPIOGetValue(PORT2,
                  2))
       {
-        charreturn = '4';
+        //charreturn = '4';
       }
       
       else if (!GPIOGetValue(PORT2,
                  4))
       {
-        charreturn = '7';
+        //charreturn = '7';
       }
       
       STATE_MACHINE = 1;
@@ -177,19 +176,19 @@ uint8_t KeypadGetKey(void)
       if (!GPIOGetValue(PORT2,
                  0))
       {
-          charreturn = '2';
+          thread_control_writeMessage(COMMAND_FORWARD);
       }
       
       else if (!GPIOGetValue(PORT2,
                  2))
       {
-        charreturn = '5';
+        //charreturn = '5';
       }
       
       else if (!GPIOGetValue(PORT2,
                  4))
       {
-        charreturn = '8';
+        //charreturn = '8';
       }
       
       STATE_MACHINE = 2;
@@ -219,67 +218,23 @@ uint8_t KeypadGetKey(void)
       if (!GPIOGetValue(PORT2,
                  0))
       {
-          charreturn = '3';
+          //charreturn = '3';
       }
       
       else if (!GPIOGetValue(PORT2,
                  2))
       {
-        charreturn = '6';
+        //charreturn = '6';
       }
       
       else if (!GPIOGetValue(PORT2,
                  4))
       {
-        charreturn = '9';
-      }
-      
-      STATE_MACHINE = 3;
-    }
-    
-    else if(STATE_MACHINE == 3)
-    {
-      // Scan column 0 (column 0 pin is grounded, other column pins 
-      // is open drain)
-      GPIOSetValue(PORT2,
-                   8,
-                   1);
-      
-      GPIOSetValue(PORT2,
-                 10,
-                 1);
-      
-      GPIOSetValue(PORT3,
-                 0,
-                 1);
-      
-      GPIOSetValue(PORT3,
-                 2,
-                 0);
-      
-      // Read rows
-      if (!GPIOGetValue(PORT2,
-                 0))
-      {
-          charreturn = 'A';
-      }
-      
-      else if (!GPIOGetValue(PORT2,
-                 2))
-      {
-        charreturn = 'B';
-      }
-      
-      else if (!GPIOGetValue(PORT2,
-                 4))
-      {
-        charreturn = 'C';
+        //charreturn = '9';
       }
       
       STATE_MACHINE = 0;
     }
-    
-    return charreturn;
 }
 
 void thread_gpio_writeMessage(GPIO_MESSAGES message)
