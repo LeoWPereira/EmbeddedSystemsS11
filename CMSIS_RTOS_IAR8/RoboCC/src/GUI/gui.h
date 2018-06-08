@@ -24,6 +24,12 @@ typedef enum
   UPDATE_SCREEN
 } GUI_MESSAGES;
 
+typedef enum 
+{
+  MAIN_SCREEN,
+  INSTRUCTION_SCREEN,
+} GUI_SCREEN_ENUM;
+
 /****************************************************************************************
  * DEFINICOES DE FUNCOES
  ****************************************************************************************/

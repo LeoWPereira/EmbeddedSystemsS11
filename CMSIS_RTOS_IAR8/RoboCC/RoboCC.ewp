@@ -357,6 +357,7 @@
                     <state>$PROJ_DIR$\src\GUI</state>
                     <state>$PROJ_DIR$\src\PWM</state>
                     <state>$PROJ_DIR$\src\Timer</state>
+                    <state>C:\Users\leona\Documents\Personal_Projects\EmbeddedSystemsS11\CMSIS_RTOS_IAR8\RTOS\RTX\SRC</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>

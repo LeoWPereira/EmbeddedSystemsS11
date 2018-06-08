@@ -6,7 +6,7 @@ osMessageQDef(controlMessage_q,
               CONTROL_MESSAGES);
 
 // Declare an ID for the message queue
-osMessageQId(controlMessage_q_id);
+osMessageQId controlMessage_q;
 
 /**
  *
@@ -16,12 +16,12 @@ void thread_control(void const *argument)
   osEvent event;
   
   // create the message queue inside the thread
-  controlMessage_q_id = osMessageCreate(osMessageQ(controlMessage_q),
-                                        NULL);
+  controlMessage_q = osMessageCreate(osMessageQ(controlMessage_q),
+                                     NULL);
   
   while(DEF_TRUE)
   {
-    event = osMessageGet(controlMessage_q_id, 
+    event = osMessageGet(controlMessage_q, 
                          osWaitForever);
     
     if(event.status == osEventMessage)
@@ -36,6 +36,15 @@ void thread_control(void const *argument)
       }
     }
   }
+  
+  return;
+}
+
+void thread_control_writeMessage(CONTROL_MESSAGES message)
+{
+  osMessagePut(controlMessage_q,
+               (uint32_t)message,
+               osWaitForever);
   
   return;
 }

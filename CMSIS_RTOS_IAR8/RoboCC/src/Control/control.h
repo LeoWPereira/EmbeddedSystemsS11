@@ -17,8 +17,6 @@
  * DEFINICOES DE TIPOS E ESTRUTURAS
  ****************************************************************************************/
 
-extern osMessageQId controlMessage_q_id;
-   
 typedef enum 
 {
   INIT_CONTROL
@@ -29,5 +27,7 @@ typedef enum
  ****************************************************************************************/
 
 extern void thread_control(void const *argument);
+
+extern void thread_control_writeMessage(CONTROL_MESSAGES message);
 
 #endif

@@ -6,7 +6,7 @@ osMessageQDef(encoderMessage_q,
               ENCODER_MESSAGES);
 
 // Declare an ID for the message queue
-osMessageQId(encoderMessage_q_id);
+osMessageQId encoderMessage_q;
 
 /**
  *
@@ -16,12 +16,12 @@ void thread_encoder(void const *argument)
   osEvent event;
   
   // create the message queue inside the thread
-  encoderMessage_q_id = osMessageCreate(osMessageQ(encoderMessage_q),
-                                        NULL);
+  encoderMessage_q = osMessageCreate(osMessageQ(encoderMessage_q),
+                                     NULL);
    
   while(DEF_TRUE)
   {
-    event = osMessageGet(encoderMessage_q_id, 
+    event = osMessageGet(encoderMessage_q, 
                          osWaitForever);
     
     if(event.status == osEventMessage)
@@ -36,6 +36,15 @@ void thread_encoder(void const *argument)
       }
     }
   }
+  
+  return;
+}
+
+void thread_encoder_writeMessage(ENCODER_MESSAGES message)
+{
+  osMessagePut(encoderMessage_q,
+               (uint32_t)message,
+               osWaitForever);
   
   return;
 }

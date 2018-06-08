@@ -17,8 +17,6 @@
  * DEFINICOES DE TIPOS E ESTRUTURAS
  ****************************************************************************************/
 
-extern osMessageQId encoderMessage_q_id;
-   
 typedef enum 
 {
   INIT_ENCODER
@@ -29,5 +27,7 @@ typedef enum
  ****************************************************************************************/
 
 extern void thread_encoder(void const *argument);
+
+extern void thread_encoder_writeMessage(ENCODER_MESSAGES message);
 
 #endif

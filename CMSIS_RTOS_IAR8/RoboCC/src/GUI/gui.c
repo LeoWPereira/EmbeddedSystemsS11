@@ -12,6 +12,10 @@ static void guiInit(void);
 
 static void guiChangeScreen(void);
 
+static void guiDrawMainScreen(void);
+
+static void guiDrawInstructionScreen(void);
+
 /**
  *
  */
@@ -61,6 +65,38 @@ void guiInit(void)
   oled_init();
   
   //
+  guiDrawMainScreen();
+  
+  return;
+}
+
+/**
+ *
+ */
+void guiChangeScreen(void)
+{
+  static GUI_SCREEN_ENUM currentScreen = MAIN_SCREEN;
+  
+  if(currentScreen == MAIN_SCREEN)
+  {
+    guiDrawInstructionScreen();
+    
+    currentScreen = INSTRUCTION_SCREEN;
+  }
+  
+  else if(currentScreen == INSTRUCTION_SCREEN)
+  {
+    guiDrawMainScreen();
+    
+    currentScreen = MAIN_SCREEN;
+  }
+  
+  return;
+}
+
+void guiDrawMainScreen(void)
+{
+  //
   oled_clearScreen(OLED_COLOR_WHITE);
   
   //
@@ -73,17 +109,17 @@ void guiInit(void)
   return;
 }
 
-/**
- *
- */
-void guiChangeScreen(void)
+void guiDrawInstructionScreen(void)
 {
+  //
+  oled_clearScreen(OLED_COLOR_WHITE);
+  
   oled_putString(5,
                  1,
                  (uint8_t*)"Leo Boboca",
                  OLED_COLOR_BLACK, 
                  OLED_COLOR_WHITE);
-  
+
   return;
 }
 

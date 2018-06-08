@@ -17,12 +17,12 @@ void thread_pwm(void const *argument)
   osEvent event;
   
   // create the message queue inside the thread
-  pwmMessage_q_id = osMessageCreate(osMessageQ(pwmMessage_q),
-                                      NULL);
+  pwmMessage_q = osMessageCreate(osMessageQ(pwmMessage_q),
+                                 NULL);
   
   while(DEF_TRUE)
   {
-    event = osMessageGet(pwmMessage_q_id, 
+    event = osMessageGet(pwmMessage_q, 
                          osWaitForever);
     
     if(event.status == osEventMessage)
@@ -43,7 +43,7 @@ void thread_pwm(void const *argument)
 
 void thread_pwm_writeMessage(PWM_MESSAGES message)
 {
-  osMessagePut(pwmMessage_q_id,
+  osMessagePut(pwmMessage_q,
                (uint32_t)message,
                osWaitForever);
   

@@ -69,13 +69,12 @@ int main()
   
   thread_Encoder_id = osThreadCreate(osThread(thread_encoder), 
                                      NULL);
-  /*
+  
   thread_Control_id = osThreadCreate(osThread(thread_control), 
                                      NULL);
   
   thread_PWM_id = osThreadCreate(osThread(thread_pwm), 
                                  NULL);
-  */
   
   thread_GPIO_id = osThreadCreate(osThread(thread_gpio), 
                                   NULL);
@@ -96,27 +95,6 @@ void SystemStart(void)
   
   // Inicializa SSP (necessario para oled)
   SSPInit();
-  
-  // Inicializa o Timer 0 (LPC_CT32B0_BASE)
-  /*timer_inicializarTimer(TIMER_INTERRUPCAO,
-                         1,
-                         0,
-                         0);
-
-  // Inicializa o Timer 0 (LPC_CT32B0_BASE)
-  timer_inicializarTimer(TIMER_COUNTER,
-                         0,
-                         0,
-                         0);*/
-  
-  GPIOSetInterrupt(PORT2,
-                   9,
-                   1,
-                   0,
-                   0);
-  
-  GPIOIntEnable(PORT2, 
-                9);
   
   return;
 }
