@@ -19,6 +19,8 @@ void thread_encoder(void const *argument)
   encoderMessage_q = osMessageCreate(osMessageQ(encoderMessage_q),
                                      NULL);
    
+  thread_encoder_writeMessage(INIT_ENCODER);
+    
   while(DEF_TRUE)
   {
     event = osMessageGet(encoderMessage_q, 
@@ -31,6 +33,9 @@ void thread_encoder(void const *argument)
         case INIT_ENCODER:
           break;
 
+        case READ_ENCODER:
+          break;
+          
         default:
           break;
       }

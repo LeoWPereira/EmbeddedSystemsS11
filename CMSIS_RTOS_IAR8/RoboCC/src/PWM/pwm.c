@@ -9,6 +9,8 @@ osMessageQDef(pwmMessage_q,
 // Declare an ID for the message queue
 osMessageQId pwmMessage_q;
 
+static void initPWM(void);
+
 /**
  *
  */
@@ -20,6 +22,8 @@ void thread_pwm(void const *argument)
   pwmMessage_q = osMessageCreate(osMessageQ(pwmMessage_q),
                                  NULL);
   
+  thread_pwm_writeMessage(INIT_PWM);
+  
   while(DEF_TRUE)
   {
     event = osMessageGet(pwmMessage_q, 
@@ -30,6 +34,7 @@ void thread_pwm(void const *argument)
       switch(event.value.v)
       {
         case INIT_PWM:
+          initPWM();
           break;
 
         default:
@@ -46,6 +51,12 @@ void thread_pwm_writeMessage(PWM_MESSAGES message)
   osMessagePut(pwmMessage_q,
                (uint32_t)message,
                osWaitForever);
+  
+  return;
+}
+
+void initPWM(void)
+{
   
   return;
 }

@@ -19,7 +19,8 @@
 
 typedef enum 
 {
-  INIT_ENCODER
+  INIT_ENCODER,
+  READ_ENCODER
 } ENCODER_MESSAGES;
 
 /****************************************************************************************

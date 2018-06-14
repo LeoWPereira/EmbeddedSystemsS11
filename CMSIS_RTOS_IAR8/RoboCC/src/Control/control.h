@@ -20,13 +20,16 @@
 typedef enum 
 {
   INIT_CONTROL,
+  APLLY_PWM,
   COMMAND_FORWARD,
   COMMAND_BACK,
   COMMAND_STOP,
   COMMAND_ROTATE_LEFT,
   COMMAND_ROTATE_RIGHT,
   COMMAND_TURN_LEFT,
-  COMMAND_TURN_RIGHT
+  COMMAND_TURN_RIGHT,
+  COMMAND_ROTATE_LEFT_BACK,
+  COMMAND_ROTATE_RIGHT_BACK
 } CONTROL_MESSAGES;
 
 /****************************************************************************************

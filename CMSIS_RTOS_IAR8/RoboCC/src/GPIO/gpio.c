@@ -134,19 +134,19 @@ void KeypadGetKey(void)
       if (!GPIOGetValue(PORT2,
                  0))
       {
-          //charreturn = '1';
+          thread_control_writeMessage(COMMAND_ROTATE_LEFT);
       }
       
       else if (!GPIOGetValue(PORT2,
                  2))
       {
-        //charreturn = '4';
+        thread_control_writeMessage(COMMAND_TURN_LEFT);
       }
       
       else if (!GPIOGetValue(PORT2,
                  4))
       {
-        //charreturn = '7';
+        thread_control_writeMessage(COMMAND_ROTATE_LEFT_BACK);
       }
       
       STATE_MACHINE = 1;
@@ -182,13 +182,13 @@ void KeypadGetKey(void)
       else if (!GPIOGetValue(PORT2,
                  2))
       {
-        //charreturn = '5';
+        thread_control_writeMessage(COMMAND_STOP);
       }
       
       else if (!GPIOGetValue(PORT2,
                  4))
       {
-        //charreturn = '8';
+        thread_control_writeMessage(COMMAND_BACK);
       }
       
       STATE_MACHINE = 2;
@@ -218,19 +218,19 @@ void KeypadGetKey(void)
       if (!GPIOGetValue(PORT2,
                  0))
       {
-          //charreturn = '3';
+          thread_control_writeMessage(COMMAND_ROTATE_RIGHT);
       }
       
       else if (!GPIOGetValue(PORT2,
                  2))
       {
-        //charreturn = '6';
+        thread_control_writeMessage(COMMAND_TURN_RIGHT);
       }
       
       else if (!GPIOGetValue(PORT2,
                  4))
       {
-        //charreturn = '9';
+        thread_control_writeMessage(COMMAND_ROTATE_RIGHT_BACK);
       }
       
       STATE_MACHINE = 0;
