@@ -11,6 +11,8 @@ osMessageQId controlMessage_q;
 
 static void applyPWM(uint32_t _pwmValue);
 
+uint32_t variavelGlobal = 0;
+
 /**
  *
  */
@@ -35,11 +37,12 @@ void thread_control(void const *argument)
       {
         case INIT_CONTROL:
           break;
-          
-        case APLLY_PWM:
-          break;
             
         case COMMAND_FORWARD:
+          thread_pwm_writeMessage(INC_PWM_1_VALUE);
+          thread_pwm_writeMessage(INC_PWM_2_VALUE);
+          
+          variavelGlobal++;
           break;
           
         case COMMAND_BACK:

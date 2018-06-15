@@ -36,6 +36,8 @@ typedef enum
  * DEFINICOES DE FUNCOES
  ****************************************************************************************/
 
+extern uint32_t variavelGlobal;
+
 extern void thread_control(void const *argument);
 
 extern void thread_control_writeMessage(CONTROL_MESSAGES message);

@@ -1,5 +1,7 @@
 #include "gui.h"
 #include "oled.h"
+#include "pwm.h"
+#include "Auxiliar.h"
 
 // Declare a message queue
 osMessageQDef(guiMessage_q,
@@ -12,9 +14,13 @@ static void guiInit(void);
 
 static void guiChangeScreen(void);
 
+static void guiUpdateScreen(void);
+
 static void guiDrawMainScreen(void);
 
 static void guiDrawInstructionScreen(void);
+
+static GUI_SCREEN_ENUM currentScreen = MAIN_SCREEN;
 
 /**
  *
@@ -47,6 +53,10 @@ void thread_gui(void const *argument)
           guiChangeScreen();
           break;
           
+        case UPDATE_SCREEN:
+          guiUpdateScreen();
+          break;
+            
         default:
           break;
       }
@@ -75,8 +85,6 @@ void guiInit(void)
  */
 void guiChangeScreen(void)
 {
-  static GUI_SCREEN_ENUM currentScreen = MAIN_SCREEN;
-  
   if(currentScreen == MAIN_SCREEN)
   {
     guiDrawInstructionScreen();
@@ -96,6 +104,18 @@ void guiChangeScreen(void)
 
 void guiDrawMainScreen(void)
 {
+  uint8_t pwmMotor1String[5];
+  uint8_t pwmMotor2String[5]; 
+  
+  intToString(pwmMotor1, 
+              pwmMotor1String, 
+              6,
+              10); 
+  
+  intToString(pwmMotor2, 
+              pwmMotor2String, 
+              6,
+              10); 
   //
   oled_clearScreen(OLED_COLOR_WHITE);
   
@@ -105,6 +125,20 @@ void guiDrawMainScreen(void)
                  (uint8_t*)"Laboratorio 03",
                  OLED_COLOR_BLACK, 
                  OLED_COLOR_WHITE);
+  
+  oled_putString(10,
+                 25,
+                 (uint8_t*)"PWM 1: ",
+                 OLED_COLOR_BLACK, 
+                 OLED_COLOR_WHITE);
+
+  oled_putString(60,
+                 25,
+                 pwmMotor1String,
+                 OLED_COLOR_BLACK, 
+                 OLED_COLOR_WHITE);
+  
+  
   
   return;
 }
@@ -120,6 +154,21 @@ void guiDrawInstructionScreen(void)
                  OLED_COLOR_BLACK, 
                  OLED_COLOR_WHITE);
 
+  return;
+}
+
+void guiUpdateScreen(void)
+{
+  if(currentScreen == MAIN_SCREEN)
+  {
+    guiDrawMainScreen();
+  }
+  
+  else if(currentScreen == INSTRUCTION_SCREEN)
+  {
+    guiDrawInstructionScreen();
+  }
+  
   return;
 }
 
