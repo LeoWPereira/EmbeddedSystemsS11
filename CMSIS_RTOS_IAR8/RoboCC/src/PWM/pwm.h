@@ -27,6 +27,7 @@
 
 #define REGISTER_PWM_CYCLE_LENGTH       4096 //(17.8 kHz)
 #define MINIMUM_PWM_VALUE               2
+#define PWM_PACE                        2
 
 /****************************************************************************************
  * DEFINICOES DE TIPOS E ESTRUTURAS

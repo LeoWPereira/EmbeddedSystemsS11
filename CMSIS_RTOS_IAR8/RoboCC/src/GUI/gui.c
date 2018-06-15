@@ -2,6 +2,7 @@
 #include "oled.h"
 #include "pwm.h"
 #include "Auxiliar.h"
+#include "encoder.h"
 
 // Declare a message queue
 osMessageQDef(guiMessage_q,
@@ -107,15 +108,16 @@ void guiDrawMainScreen(void)
   uint8_t pwmMotor1String[5];
   uint8_t pwmMotor2String[5]; 
   
-  intToString(pwmMotor1, 
+  intToString(counterMotor1/*pwmMotor1*/, 
               pwmMotor1String, 
-              6,
+              3,
               10); 
   
-  intToString(pwmMotor2, 
+  intToString(counterMotor2/*pwmMotor2*/, 
               pwmMotor2String, 
-              6,
-              10); 
+              3,
+              10);
+  
   //
   oled_clearScreen(OLED_COLOR_WHITE);
   
@@ -138,7 +140,11 @@ void guiDrawMainScreen(void)
                  OLED_COLOR_BLACK, 
                  OLED_COLOR_WHITE);
   
-  
+  oled_putString(75,
+                 25,
+                 (uint8_t*)"%",
+                 OLED_COLOR_BLACK, 
+                 OLED_COLOR_WHITE);
   
   return;
 }

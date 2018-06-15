@@ -13,9 +13,15 @@
  * CONSTANTES E MACROS
  ****************************************************************************************/
 
+#define TIMER_COUNTER_MOTOR1                   LPC_TMR16B0
+#define TIMER_COUNTER_MOTOR2                   LPC_TMR16B1
+
 /****************************************************************************************
  * DEFINICOES DE TIPOS E ESTRUTURAS
  ****************************************************************************************/
+
+extern uint32_t counterMotor1;
+extern uint32_t counterMotor2;
 
 typedef enum 
 {
@@ -30,5 +36,11 @@ typedef enum
 extern void thread_encoder(void const *argument);
 
 extern void thread_encoder_writeMessage(ENCODER_MESSAGES message);
+
+extern uint8_t timer_inicializarTimer(LPC_TMR_TypeDef* timer);
+
+extern uint8_t timer_habilitaTimer(LPC_TMR_TypeDef* timer);
+
+extern uint8_t timer_desabilitaTimer(LPC_TMR_TypeDef* timer);
 
 #endif

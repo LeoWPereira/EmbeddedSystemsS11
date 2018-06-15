@@ -36,9 +36,14 @@ void thread_timer(void const *argument)
       thread_gpio_writeMessage(READ_INTERRUPT_BUTTON);
     }
     
-    if((rt_time_get() % TIMER_APPLY_PWM_CONTROL) == 0)
+    if((rt_time_get() % TIMER_UPDATE_SCREEN) == 0)
     {
-      thread_control_writeMessage(APLLY_PWM);
+      thread_gui_writeMessage(UPDATE_SCREEN);
+    }
+    
+    if((rt_time_get() % TIMER_EXECUTE_PID) == 0)
+    {
+      thread_control_writeMessage(EXECUTE_PID_CONTROL);
     }
     
     if((rt_time_get() % TIMER_READ_ENCODER) == 0)

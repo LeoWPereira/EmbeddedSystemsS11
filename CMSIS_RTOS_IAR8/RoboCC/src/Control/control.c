@@ -9,10 +9,6 @@ osMessageQDef(controlMessage_q,
 // Declare an ID for the message queue
 osMessageQId controlMessage_q;
 
-static void applyPWM(uint32_t _pwmValue);
-
-uint32_t variavelGlobal = 0;
-
 /**
  *
  */
@@ -38,14 +34,18 @@ void thread_control(void const *argument)
         case INIT_CONTROL:
           break;
             
-        case COMMAND_FORWARD:
-          thread_pwm_writeMessage(INC_PWM_1_VALUE);
-          thread_pwm_writeMessage(INC_PWM_2_VALUE);
+        case EXECUTE_PID_CONTROL:
+          break;
           
-          variavelGlobal++;
+        case COMMAND_FORWARD:
+          thread_pwm_writeMessage(DEC_PWM_1_VALUE);
+          thread_pwm_writeMessage(DEC_PWM_2_VALUE);
           break;
           
         case COMMAND_BACK:
+          thread_pwm_writeMessage(INC_PWM_1_VALUE);
+          thread_pwm_writeMessage(INC_PWM_2_VALUE);
+          
           break;
           
         case COMMAND_STOP:
@@ -84,10 +84,5 @@ void thread_control_writeMessage(CONTROL_MESSAGES message)
                (uint32_t)message,
                osWaitForever);
   
-  return;
-}
-
-void applyPWM(uint32_t _pwmValue)
-{
   return;
 }

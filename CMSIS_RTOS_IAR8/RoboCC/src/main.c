@@ -53,6 +53,9 @@ static void SystemStart(void);
  */
 int main()
 {
+  //timer_inicializarTimer(TIMER_COUNTER_MOTOR1);
+  timer_inicializarTimer(TIMER_COUNTER_MOTOR2);
+  
   osKernelInitialize();
   
   SystemInit();

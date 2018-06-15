@@ -20,7 +20,7 @@
 typedef enum 
 {
   INIT_CONTROL,
-  APLLY_PWM,
+  EXECUTE_PID_CONTROL,
   COMMAND_FORWARD,
   COMMAND_BACK,
   COMMAND_STOP,
@@ -35,8 +35,6 @@ typedef enum
 /****************************************************************************************
  * DEFINICOES DE FUNCOES
  ****************************************************************************************/
-
-extern uint32_t variavelGlobal;
 
 extern void thread_control(void const *argument);
 

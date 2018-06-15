@@ -46,22 +46,22 @@ void thread_pwm(void const *argument)
           
         case INC_PWM_1_VALUE:
           changePWMValue(MOTOR_1,
-                         50);
+                         PWM_PACE);
           break;
           
         case INC_PWM_2_VALUE:
           changePWMValue(MOTOR_2,
-                         50);
+                         PWM_PACE);
           break;
           
         case DEC_PWM_1_VALUE:
           changePWMValue(MOTOR_1,
-                         -50);
+                         -PWM_PACE);
           break;
           
         case DEC_PWM_2_VALUE:
-          changePWMValue(MOTOR_1,
-                         -50);
+          changePWMValue(MOTOR_2,
+                         -PWM_PACE);
           break;
         
         default:
@@ -101,9 +101,9 @@ void initPWM(void)
   
   REGISTER_MR3_PWM_MOTORES      = REGISTER_PWM_CYCLE_LENGTH;
   
-  REGISTER_MR0_MOTOR_1          = 0x01;
+  REGISTER_MR0_MOTOR_1          = (REGISTER_PWM_CYCLE_LENGTH - MINIMUM_PWM_VALUE);
     
-  REGISTER_MR1_MOTOR_2          = 0x01;
+  REGISTER_MR1_MOTOR_2          = (REGISTER_PWM_CYCLE_LENGTH - MINIMUM_PWM_VALUE);
 
   REGISTER_TCR_PWM_MOTORES = 1;    //enable timer
   
@@ -127,7 +127,7 @@ void changePWMValue(PWM_MOTORS chosenMotor,
         REGISTER_MR0_MOTOR_1 = (REGISTER_PWM_CYCLE_LENGTH - MINIMUM_PWM_VALUE);
       }
       
-      pwmMotor1 = REGISTER_MR0_MOTOR_1;
+      pwmMotor1 = ((REGISTER_PWM_CYCLE_LENGTH - REGISTER_MR0_MOTOR_1) * 100) / REGISTER_PWM_CYCLE_LENGTH;
     }
     
     else if(chosenMotor == MOTOR_2)
@@ -142,7 +142,7 @@ void changePWMValue(PWM_MOTORS chosenMotor,
         REGISTER_MR1_MOTOR_2 = (REGISTER_PWM_CYCLE_LENGTH - MINIMUM_PWM_VALUE);
       }
       
-      pwmMotor2 = REGISTER_MR1_MOTOR_2;
+      pwmMotor2 = ((REGISTER_PWM_CYCLE_LENGTH - REGISTER_MR1_MOTOR_2) * 100) / REGISTER_PWM_CYCLE_LENGTH;
     }
   }
   
@@ -160,7 +160,7 @@ void changePWMValue(PWM_MOTORS chosenMotor,
         REGISTER_MR0_MOTOR_1 = MINIMUM_PWM_VALUE;
       }
       
-      pwmMotor1 = REGISTER_MR0_MOTOR_1;
+      pwmMotor1 = ((REGISTER_PWM_CYCLE_LENGTH - REGISTER_MR0_MOTOR_1) * 100) / REGISTER_PWM_CYCLE_LENGTH;
     }
     
     else if(chosenMotor == MOTOR_2)
@@ -175,11 +175,9 @@ void changePWMValue(PWM_MOTORS chosenMotor,
         REGISTER_MR1_MOTOR_2 = MINIMUM_PWM_VALUE;
       }
       
-      pwmMotor2 = REGISTER_MR1_MOTOR_2;
+      pwmMotor2 = ((REGISTER_PWM_CYCLE_LENGTH - REGISTER_MR1_MOTOR_2) * 100) / REGISTER_PWM_CYCLE_LENGTH;
     }
   }
-  
-  //thread_gui_writeMessage(UPDATE_SCREEN);
   
   return;
 }

@@ -7,7 +7,7 @@ osMessageQDef(gpioMessage_q,
               5,
               GPIO_MESSAGES);
 
-osMessageQId gpioMessage_q;
+osMessageQId gpioMessage_q;                 
 
 static uint8_t changeScreenButton = 0;
 
