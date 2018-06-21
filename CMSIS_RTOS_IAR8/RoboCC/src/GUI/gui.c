@@ -154,9 +154,9 @@ void guiDrawInstructionScreen(void)
   //
   oled_clearScreen(OLED_COLOR_WHITE);
   
-  oled_putString(5,
+  oled_putString(15,
                  1,
-                 (uint8_t*)"Leo Boboca",
+                 (uint8_t*)"Instrucoes",
                  OLED_COLOR_BLACK, 
                  OLED_COLOR_WHITE);
 
