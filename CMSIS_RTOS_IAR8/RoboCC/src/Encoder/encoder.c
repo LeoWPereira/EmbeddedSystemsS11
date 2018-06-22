@@ -55,7 +55,10 @@ void thread_encoder(void const *argument)
   // create the message queue inside the thread
   encoderMessage_q = osMessageCreate(osMessageQ(encoderMessage_q),
                                      NULL);
-   
+  
+  timer_inicializarTimer(TIMER_COUNTER_MOTOR1);
+  timer_inicializarTimer(TIMER_COUNTER_MOTOR2);
+  
   thread_encoder_writeMessage(INIT_ENCODER);
     
   while(DEF_TRUE)
@@ -170,12 +173,12 @@ uint8_t timer_desabilitaTimer(LPC_TMR_TypeDef* timer)
 
 void readEncoder(void)
 {
-  counterMotor1 = TIMER_COUNTER_MOTOR1->TC;
+  counterMotor1 += TIMER_COUNTER_MOTOR1->TC;
   
   TIMER_COUNTER_MOTOR1->TCR = 0x02;
   TIMER_COUNTER_MOTOR1->TCR = 0x01;
   
-  counterMotor2 = TIMER_COUNTER_MOTOR2->TC;
+  counterMotor2 += TIMER_COUNTER_MOTOR2->TC;
   
   TIMER_COUNTER_MOTOR2->TCR = 0x02;
   TIMER_COUNTER_MOTOR2->TCR = 0x01;

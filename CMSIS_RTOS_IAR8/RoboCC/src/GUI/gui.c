@@ -105,17 +105,17 @@ void guiChangeScreen(void)
 
 void guiDrawMainScreen(void)
 {
-  uint8_t pwmMotor1String[5];
-  uint8_t pwmMotor2String[5]; 
+  uint8_t pwmMotor1String[10];
+  uint8_t pwmMotor2String[10]; 
   
-  intToString(counterMotor1/*pwmMotor1*/, 
+  intToString(pwmMotor1, 
               pwmMotor1String, 
-              3,
+              6,
               10); 
   
-  intToString(counterMotor2/*pwmMotor2*/, 
+  intToString(pwmMotor2, 
               pwmMotor2String, 
-              3,
+              6,
               10);
   
   //
@@ -129,19 +129,37 @@ void guiDrawMainScreen(void)
                  OLED_COLOR_WHITE);
   
   oled_putString(10,
-                 25,
+                 20,
                  (uint8_t*)"PWM 1: ",
                  OLED_COLOR_BLACK, 
                  OLED_COLOR_WHITE);
 
   oled_putString(60,
-                 25,
+                 20,
                  pwmMotor1String,
                  OLED_COLOR_BLACK, 
                  OLED_COLOR_WHITE);
   
   oled_putString(75,
-                 25,
+                 20,
+                 (uint8_t*)"%",
+                 OLED_COLOR_BLACK, 
+                 OLED_COLOR_WHITE);
+  
+  oled_putString(10,
+                 40,
+                 (uint8_t*)"PWM 2: ",
+                 OLED_COLOR_BLACK, 
+                 OLED_COLOR_WHITE);
+
+  oled_putString(60,
+                 40,
+                 pwmMotor2String,
+                 OLED_COLOR_BLACK, 
+                 OLED_COLOR_WHITE);
+  
+  oled_putString(75,
+                 40,
                  (uint8_t*)"%",
                  OLED_COLOR_BLACK, 
                  OLED_COLOR_WHITE);
