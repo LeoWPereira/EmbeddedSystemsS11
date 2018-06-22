@@ -13,7 +13,7 @@
  * CONSTANTES E MACROS
  ****************************************************************************************/
 
-#define TIMER_READ_KEYBOARD             20
+#define TIMER_READ_KEYBOARD             15
 #define TIMER_UPDATE_SCREEN             100
 #define TIMER_READ_INTERRUPT_BUTTON     100
 #define TIMER_APPLY_PWM_CONTROL         100

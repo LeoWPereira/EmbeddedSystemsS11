@@ -40,27 +40,45 @@ void thread_control(void const *argument)
         case COMMAND_FORWARD:
           thread_pwm_writeMessage(DEC_PWM_1_VALUE);
           thread_pwm_writeMessage(DEC_PWM_2_VALUE);
+          
+          thread_pwm_writeMessage(HB_FORWARD);
           break;
           
         case COMMAND_BACK:
           thread_pwm_writeMessage(INC_PWM_1_VALUE);
           thread_pwm_writeMessage(INC_PWM_2_VALUE);
           
+          thread_pwm_writeMessage(HB_BACK);
+          
           break;
           
         case COMMAND_STOP:
+          while((pwmMotor1 > 1) || (pwmMotor2 > 1))
+          {
+            thread_pwm_writeMessage(INC_PWM_1_VALUE);
+            thread_pwm_writeMessage(INC_PWM_2_VALUE);
+          
+            osDelay(50);
+          }
           break;
           
         case COMMAND_ROTATE_LEFT:
+          
           break;
           
         case COMMAND_ROTATE_RIGHT:
           break;
           
         case COMMAND_TURN_LEFT:
+          thread_pwm_writeMessage(DEC_PWM_2_VALUE);
+          thread_pwm_writeMessage(DEC_PWM_2_VALUE);
+          thread_pwm_writeMessage(DEC_PWM_1_VALUE);
           break;
           
         case COMMAND_TURN_RIGHT:
+          thread_pwm_writeMessage(DEC_PWM_1_VALUE);
+          thread_pwm_writeMessage(DEC_PWM_1_VALUE);
+          thread_pwm_writeMessage(DEC_PWM_2_VALUE);
           break;
           
         case COMMAND_ROTATE_LEFT_BACK:

@@ -15,6 +15,9 @@
 
 #define REGISTER_PWM_CYCLE_BASE         LPC_IOCON->R_PIO0_11       
 
+#define REGISTER_H_BRIDGE_MOTOR_1       LPC_IOCON->PIO1_4
+#define REGISTER_H_BRIDGE_MOTOR_2       LPC_IOCON->PIO1_5
+   
 #define REGISTER_PWM_MOTOR_1            LPC_IOCON->PIO1_6
 #define REGISTER_PWM_MOTOR_2            LPC_IOCON->PIO1_7
    
@@ -26,8 +29,8 @@
 #define REGISTER_MR1_MOTOR_2            LPC_TMR32B0->MR1
 
 #define REGISTER_PWM_CYCLE_LENGTH       4096 //(17.8 kHz)
-#define MINIMUM_PWM_VALUE               2
-#define PWM_PACE                        2
+#define PWM_PACE                        30
+#define MINIMUM_PWM_VALUE               PWM_PACE
 
 /****************************************************************************************
  * DEFINICOES DE TIPOS E ESTRUTURAS
@@ -42,7 +45,11 @@ typedef enum
   INC_PWM_1_VALUE,
   INC_PWM_2_VALUE,
   DEC_PWM_1_VALUE,
-  DEC_PWM_2_VALUE
+  DEC_PWM_2_VALUE,
+  HB_FORWARD,
+  HB_BACK,
+  HB_ROTATE_LEFT,
+  HB_ROTATE_RIGHT
 } PWM_MESSAGES;
 
 typedef enum
@@ -51,6 +58,14 @@ typedef enum
   MOTOR_2
 } PWM_MOTORS;
 
+typedef enum
+{
+  H_BRIDGE_FORWARD,
+  H_BRIDGE_BACK,
+  H_BRIDGE_ROTATE_LEFT,
+  H_BRIDGE_ROTATE_RIGHT
+} H_BRIDGE_STATE;
+
 /****************************************************************************************
  * DEFINICOES DE FUNCOES
  ****************************************************************************************/
@@ -58,5 +73,7 @@ typedef enum
 extern void thread_pwm(void const *argument);
 
 extern void thread_pwm_writeMessage(PWM_MESSAGES message);
+
+extern void thread_pwm_setDirection(H_BRIDGE_STATE _state);
 
 #endif

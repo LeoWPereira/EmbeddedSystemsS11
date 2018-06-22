@@ -130,6 +130,8 @@ void KeypadGetKey(void)
                  2,
                  1);
       
+      osDelay(10);
+      
       // Read rows
       if (!GPIOGetValue(PORT2,
                  0))
@@ -171,6 +173,8 @@ void KeypadGetKey(void)
       GPIOSetValue(PORT3,
                  2,
                  1);
+      
+      osDelay(10);
       
       // Read rows
       if (!GPIOGetValue(PORT2,
@@ -214,6 +218,8 @@ void KeypadGetKey(void)
                  2,
                  1);
       
+      osDelay(10);
+      
       // Read rows
       if (!GPIOGetValue(PORT2,
                  0))
@@ -235,6 +241,8 @@ void KeypadGetKey(void)
       
       STATE_MACHINE = 0;
     }
+    
+    return;
 }
 
 void thread_gpio_writeMessage(GPIO_MESSAGES message)

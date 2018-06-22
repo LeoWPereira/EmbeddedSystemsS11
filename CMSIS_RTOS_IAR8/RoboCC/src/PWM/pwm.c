@@ -63,7 +63,23 @@ void thread_pwm(void const *argument)
           changePWMValue(MOTOR_2,
                          -PWM_PACE);
           break;
+          
+      case HB_FORWARD:
+        thread_pwm_setDirection(H_BRIDGE_FORWARD);
+        break;
+      
+      case HB_BACK:
+        thread_pwm_setDirection(H_BRIDGE_BACK);
+        break;
+      
+      case HB_ROTATE_LEFT:
+        thread_pwm_setDirection(H_BRIDGE_ROTATE_LEFT);
+        break;
         
+      case HB_ROTATE_RIGHT:
+        thread_pwm_setDirection(H_BRIDGE_ROTATE_RIGHT);
+          break;
+          
         default:
           break;
       }
@@ -177,6 +193,37 @@ void changePWMValue(PWM_MOTORS chosenMotor,
       
       pwmMotor2 = ((REGISTER_PWM_CYCLE_LENGTH - REGISTER_MR1_MOTOR_2) * 100) / REGISTER_PWM_CYCLE_LENGTH;
     }
+  }
+  
+  return;
+}
+
+void thread_pwm_setDirection(H_BRIDGE_STATE _state)
+{
+  switch(_state)
+  {
+    case H_BRIDGE_FORWARD:
+      GPIOSetValue(PORT1,
+                   4,
+                   1);
+      
+      GPIOSetValue(PORT1,
+                   5,
+                   1);
+      break;
+      
+    case H_BRIDGE_BACK:
+      
+      break;
+
+    case H_BRIDGE_ROTATE_LEFT:
+      break;
+    
+    case H_BRIDGE_ROTATE_RIGHT:
+      break;
+
+    default:
+      break;
   }
   
   return;
