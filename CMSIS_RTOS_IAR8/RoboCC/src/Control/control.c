@@ -20,8 +20,6 @@ void thread_control(void const *argument)
   controlMessage_q = osMessageCreate(osMessageQ(controlMessage_q),
                                      NULL);
   
-  thread_control_writeMessage(INIT_CONTROL);
-  
   while(DEF_TRUE)
   {
     event = osMessageGet(controlMessage_q, 
@@ -31,9 +29,6 @@ void thread_control(void const *argument)
     {
       switch(event.value.v)
       {
-        case INIT_CONTROL:
-          break;
-            
         case EXECUTE_PID_CONTROL:
           break;
           
@@ -66,26 +61,26 @@ void thread_control(void const *argument)
           
         case COMMAND_ROTATE_LEFT:
           thread_pwm_writeMessage(DEC_PWM_2_VALUE);
+          thread_pwm_writeMessage(DEC_PWM_2_VALUE);
           thread_pwm_writeMessage(DEC_PWM_1_VALUE);
-          thread_pwm_writeMessage(HB_ROTATE_LEFT);
           break;
           
         case COMMAND_ROTATE_RIGHT:
-          thread_pwm_writeMessage(DEC_PWM_2_VALUE);
           thread_pwm_writeMessage(DEC_PWM_1_VALUE);
-          thread_pwm_writeMessage(HB_ROTATE_RIGHT);
+          thread_pwm_writeMessage(DEC_PWM_1_VALUE);
+          thread_pwm_writeMessage(DEC_PWM_2_VALUE);
           break;
           
         case COMMAND_TURN_LEFT:
           thread_pwm_writeMessage(DEC_PWM_2_VALUE);
-          thread_pwm_writeMessage(DEC_PWM_2_VALUE);
           thread_pwm_writeMessage(DEC_PWM_1_VALUE);
+          thread_pwm_writeMessage(HB_ROTATE_LEFT);
           break;
           
         case COMMAND_TURN_RIGHT:
-          thread_pwm_writeMessage(DEC_PWM_1_VALUE);
-          thread_pwm_writeMessage(DEC_PWM_1_VALUE);
           thread_pwm_writeMessage(DEC_PWM_2_VALUE);
+          thread_pwm_writeMessage(DEC_PWM_1_VALUE);
+          thread_pwm_writeMessage(HB_ROTATE_RIGHT);
           break;
           
         case COMMAND_ROTATE_LEFT_BACK:
