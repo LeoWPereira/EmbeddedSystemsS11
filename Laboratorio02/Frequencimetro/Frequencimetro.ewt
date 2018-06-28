@@ -2370,36 +2370,51 @@
         </settings>
     </configuration>
     <group>
-        <name>Auxiliares</name>
+        <name>Configs</name>
         <file>
-            <name>$PROJ_DIR$\src\Auxiliares\Auxiliar.c</name>
+            <name>$PROJ_DIR$\src\RTX_Conf_CM.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Device\NXP\LPC13xx\Source\IAR\startup_LPC13xx.s</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Device\NXP\LPC13xx\Source\system_LPC13xx.c</name>
         </file>
     </group>
     <group>
-        <name>GPIO</name>
+        <name>Libraries</name>
         <file>
-            <name>$PROJ_DIR$\src\GPIO\gpio.c</name>
+            <name>$PROJ_DIR$\..\Lib_EaBaseBoard\Debug\Exe\Lib_EaBaseBoard.a</name>
         </file>
-    </group>
-    <group>
-        <name>Timer</name>
         <file>
-            <name>$PROJ_DIR$\src\Timer\Timer.c</name>
+            <name>$PROJ_DIR$\..\Lib_MCU\Debug\Exe\Lib_MCU.a</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\CMSIS_RTOS_IAR8\RTOS\RTX\SRC\IAR\CM3_LE\RTX_Lib_CM.a</name>
         </file>
     </group>
     <file>
-        <name>$PROJ_DIR$\..\Lib_EaBaseBoard\Debug\Exe\Lib_EaBaseBoard.a</name>
+        <name>$PROJ_DIR$\src\Auxiliares\Auxiliar.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\Lib_MCU\Debug\Exe\Lib_MCU.a</name>
+        <name>$PROJ_DIR$\src\Control\control.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\src\Encoder\encoder.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\src\GPIO\gpio.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\src\GUI\gui.c</name>
     </file>
     <file>
         <name>$PROJ_DIR$\src\main.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\Device\NXP\LPC13xx\Source\IAR\startup_LPC13xx.s</name>
+        <name>$PROJ_DIR$\src\PWM\pwm.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\..\Device\NXP\LPC13xx\Source\system_LPC13xx.c</name>
+        <name>$PROJ_DIR$\src\Timer\Timer.c</name>
     </file>
 </project>

@@ -9,6 +9,11 @@
  ****************************************************************************************/
 
 #include "Timer.h"
+#include "gui.h"
+#include "rt_TypeDef.h"
+#include "rt_Time.h"
+#include "control.h"
+#include "encoder.h"
 
 /****************************************************************************************
  * CONSTANTES E MACROS
@@ -40,32 +45,43 @@ static uint16_t printCounterKHz = 0;
  * DEFINICOES DE FUNCOES EXTERNAVEIS
  ****************************************************************************************/
 
- /**
- * 
- */
-void TIMER32_0_IRQHandler(void)
+void thread_timer(void const *argument)
 {
-    frequencyCounter = TIMER_COUNTER->TC;
-     
-    TIMER_COUNTER->TCR = 0x02;
-    TIMER_COUNTER->TCR = 0x01;
+  // Inicializa o Timer 0 (LPC_CT32B0_BASE)
+  timer_inicializarTimer(TIMER_COUNTER,
+                         0,
+                         0,
+                         0);
   
-    // clear interrupt flag
-    LPC_TMR32B0->IR = 1;	
-    
-    if((frequencyScale == HERTZ) || (printCounterKHz == PERIODO_INTERRUPCAO_KHERZ))
+  while(DEF_TRUE)
+  {
+    if((rt_time_get() % TIMER_READ_KEYBOARD) == 0)
     {
-      ucFlagPrintFrequency = DEF_TRUE;
-      
-      printCounterKHz = 0;
+      thread_gpio_writeMessage(READ_KEYBOARD);
     }
     
-    else if(frequencyScale == KILO_HERTZ)
+    if((rt_time_get() % TIMER_READ_INTERRUPT_BUTTON) == 0)
     {
-        printCounterKHz++;
+      thread_gpio_writeMessage(READ_INTERRUPT_BUTTON);
     }
+    
+    if((rt_time_get() % TIMER_UPDATE_SCREEN) == 0)
+    {
+      thread_gui_writeMessage(UPDATE_SCREEN);
+    }
+    
+    if((rt_time_get() % TIMER_EXECUTE_PID) == 0)
+    {
+      thread_control_writeMessage(EXECUTE_PID_CONTROL);
+    }
+    
+    if((rt_time_get() % TIMER_READ_ENCODER) == 0)
+    {
+      thread_encoder_writeMessage(READ_ENCODER);
+    }
+  }
   
-   return;
+  return;
 }
 
 /**

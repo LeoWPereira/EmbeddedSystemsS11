@@ -11,19 +11,7 @@
  *
  */
 void thread_timer(void const *argument)
-{
-  // Inicializa o Timer 0 (LPC_CT32B0_BASE)
-  /*timer_inicializarTimer(TIMER_INTERRUPCAO,
-                         1,
-                         0,
-                         0);
-
-  // Inicializa o Timer 0 (LPC_CT32B0_BASE)
-  timer_inicializarTimer(TIMER_COUNTER,
-                         0,
-                         0,
-                         0);*/
-  
+{  
   while(DEF_TRUE)
   {
     if((rt_time_get() % TIMER_READ_KEYBOARD) == 0)

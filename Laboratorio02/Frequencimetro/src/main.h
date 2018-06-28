@@ -11,11 +11,16 @@
 
 #include <stdio.h>
 
+#include "LPC13xx.h" // CMSIS-Core
+#include "cmsis_os.h" // CMSIS-RTOS
+
 #include "mcu_regs.h"
 #include "type.h"
+
+#include "ssp.h"
+
 #include "oled.h"
 #include "gpio.h"
-#include "ssp.h"
 
 /****************************************************************************************
  * CONSTANTES E MACROS
@@ -47,5 +52,17 @@ extern uint8_t frequencyScale;
 extern uint8_t ucFlagPrintFrequency;
 
 extern uint8_t ucFlagPrintFrequencyScale;
+
+extern uint32_t frequencyCounter;
+
+typedef enum
+{
+  READ_INTERRUPT_BUTTON,
+  READ_KEYBOARD
+} GPIO_MESSAGES;
+
+extern void thread_gpio(void const *argument);
+
+extern void thread_gpio_writeMessage(GPIO_MESSAGES message);
 
 #endif

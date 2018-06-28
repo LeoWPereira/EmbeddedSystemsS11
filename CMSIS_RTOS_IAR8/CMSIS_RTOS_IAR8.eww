@@ -4,6 +4,9 @@
         <path>$WS_DIR$\blinky\blinky.ewp</path>
     </project>
     <project>
+        <path>$WS_DIR$\..\Laboratorio02\Frequencimetro\Frequencimetro.ewp</path>
+    </project>
+    <project>
         <path>$WS_DIR$\Lib_EaBaseBoard\Lib_EaBaseBoard.ewp</path>
     </project>
     <project>
