@@ -169,14 +169,21 @@ void guiDrawMainScreen(void)
 
 void guiDrawInstructionScreen(void)
 {
-  //
-  oled_clearScreen(OLED_COLOR_WHITE);
+  if(currentScreen == INSTRUCTION_SCREEN)
+  {
+    osThreadYield();
+  }
   
-  oled_putString(15,
-                 1,
-                 (uint8_t*)"Instrucoes",
-                 OLED_COLOR_BLACK, 
-                 OLED_COLOR_WHITE);
+  else
+  {
+    oled_clearScreen(OLED_COLOR_WHITE);
+    
+    oled_putString(15,
+                   1,
+                   (uint8_t*)"Instrucoes",
+                   OLED_COLOR_BLACK, 
+                   OLED_COLOR_WHITE);
+  }
 
   return;
 }
